@@ -32,6 +32,11 @@ factory/
   review/                 # 검토 리포트, 실패 템플릿 격리 기록
 ```
 
+## 웹 버전 (설치 불필요 — 권장)
+
+- 브라우저에서 바로 사용: Vercel 배포 (main 푸시 시 자동 재배포)
+- Chromium 기반 앱이 실행되지 않는 기기(보안 정책·구형 Windows)에서도 동작
+
 ## 데스크톱 앱 (Windows)
 
 - Releases에서 **BamsamFactory-Setup-*.exe** 를 받아 설치하면 자체 창을 가진 앱으로 실행된다
