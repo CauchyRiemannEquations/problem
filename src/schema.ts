@@ -45,8 +45,14 @@ export interface ProblemTemplate {
   distractors: DistractorSpec[];
   /** 카드 common_mistakes 중 어떤 걸 반영했는지 (원문 인용) */
   source_mistakes: string[];
-  /** 그래프/그림 필요 여부. true면 v0.1에서는 생성 대상에서 제외(보류 플래그) */
+  /**
+   * 그래프/그림 필요 여부.
+   * true + figure 스펙 있음 → 생성 시 SVG를 자동 렌더링해 문제에 첨부.
+   * true + figure 스펙 없음 → 생성 보류(격리 플래그).
+   */
   needs_figure: boolean;
+  /** 그림 스펙 (파라미터 기반 결정론적 SVG 생성). needs_figure=true인 템플릿에서 사용 */
+  figure?: FigureSpec;
   /** 이 문제가 미적분Ⅰ 범위인 근거 한 줄 */
   curriculum_check: string;
 }
@@ -72,6 +78,27 @@ export interface DistractorSpec {
   mistake_type: string;
 }
 
+/**
+ * 그림 스펙. 모든 수치 문자열은 파라미터로 이루어진 mathjs 식이며
+ * 생성 시점에 평가된다 (예: "r*s", "min(p, 0) - 2").
+ */
+export interface FigureSpec {
+  /** 수학 좌표 창: x=[min,max], y=[min,max] (식 문자열) */
+  window: { x: [string, string]; y: [string, string] };
+  elements: FigureElement[];
+}
+
+export type FigureElement =
+  /** 다항함수 곡선 y = c0 + c1·x + c2·x² + … (coeffs는 낮은 차수부터). domain의 "xmin"/"xmax"는 창 경계 */
+  | { kind: "poly"; coeffs: string[]; domain?: [string, string]; dashed?: boolean }
+  | { kind: "segment"; from: [string, string]; to: [string, string]; dashed?: boolean }
+  /** open=true면 뚫린 점(흰 원), 아니면 닫힌 점 */
+  | { kind: "point"; at: [string, string]; open?: boolean }
+  /** x축 눈금+값 라벨. text 생략 시 at 평가값 표시 */
+  | { kind: "xtick"; at: string; text?: string }
+  | { kind: "ytick"; at: string; text?: string }
+  | { kind: "label"; at: [string, string]; text: string; anchor?: "start" | "middle" | "end" };
+
 /** 생성기 출력 1문항 (out/*.jsonl의 한 줄) */
 export interface GeneratedProblem {
   problem_id: string; // 예: "T-M1-LIM-05-a#0001"
@@ -87,4 +114,6 @@ export interface GeneratedProblem {
   params_used: Record<string, number | string>;
   /** 보기별 출처: "answer" 또는 해당 오답의 mistake_type */
   choice_origins: string[];
+  /** 템플릿에 figure 스펙이 있으면 렌더링된 SVG 문자열 */
+  figure_svg?: string;
 }

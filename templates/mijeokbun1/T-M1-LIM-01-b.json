@@ -1,0 +1,63 @@
+{
+  "template_id": "T-M1-LIM-01-b",
+  "card_id": "M1-LIM-01",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "함수의 극한의 뜻 - 그래프에서 뚫린 점의 극한 읽기",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{그림은 함수 } y = f(x) \\text{ 의 그래프이다. } \\lim_{x \\to {p}} f(x) + f({p}) \\text{ 의 값은?}",
+  "params": [
+    { "name": "p", "type": "int", "range": [-3, 3], "exclude": [0] },
+    { "name": "a", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "m", "type": "int", "range": [-5, 5], "exclude": [0] }
+  ],
+  "constraints": [
+    "m != p + a",
+    "p + a != 0",
+    "abs(m - (p + a)) >= 2"
+  ],
+  "answer_expr": "(p + a) + m",
+  "distractors": [
+    {
+      "expr": "2*(p + a)",
+      "mistake_type": "극한값과 함수값을 같은 것으로 생각한다 → f({p})도 뚫린 점의 y값(극한값)으로 읽음"
+    },
+    {
+      "expr": "2*m",
+      "mistake_type": "그래프에서 뚫린 점의 y값과 극한값을 헷갈린다 → 극한값도 찍힌 점의 y값으로 읽음"
+    },
+    {
+      "expr": "m",
+      "mistake_type": "generic: 뚫린 점 때문에 극한이 없다고 보고 함수값만 답함"
+    },
+    {
+      "expr": "p + a",
+      "mistake_type": "generic: 극한값만 계산하고 f({p})를 누락"
+    }
+  ],
+  "source_mistakes": [
+    "극한값과 함수값을 같은 것으로 생각한다.",
+    "그래프에서 뚫린 점의 y값과 극한값을 헷갈린다."
+  ],
+  "needs_figure": true,
+  "figure": {
+    "window": {
+      "x": ["min(p, 0) - 2", "max(p, 0) + 2"],
+      "y": ["min(min(p + a, m), 0) - 2", "max(max(p + a, m), 0) + 2"]
+    },
+    "elements": [
+      { "kind": "poly", "coeffs": ["a", "1"] },
+      { "kind": "segment", "from": ["p", "0"], "to": ["p", "p + a"], "dashed": true },
+      { "kind": "segment", "from": ["p", "p + a"], "to": ["0", "p + a"], "dashed": true },
+      { "kind": "segment", "from": ["p", "m"], "to": ["0", "m"], "dashed": true },
+      { "kind": "point", "at": ["p", "p + a"], "open": true },
+      { "kind": "point", "at": ["p", "m"] },
+      { "kind": "xtick", "at": "p" },
+      { "kind": "ytick", "at": "p + a" },
+      { "kind": "ytick", "at": "m" },
+      { "kind": "label", "at": ["min(p, 0) - 1.6", "max(max(p + a, m), 0) + 1.2"], "text": "y = f(x)" }
+    ]
+  },
+  "curriculum_check": "뚫린 점(극한값)과 찍힌 점(함수값)을 구분해 읽는 것은 미적분Ⅰ '함수의 극한' 도입 개념 그 자체이며, 그림은 일차함수 그래프를 파라미터에서 결정론적으로 렌더링한다."
+}

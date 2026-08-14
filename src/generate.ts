@@ -5,7 +5,7 @@
  */
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { loadTemplates, generateProblem, mulberry32, FACTORY_ROOT, type GenFailure } from "./engine.js";
+import { loadTemplates, generateProblem, mulberry32, isGenerable, FACTORY_ROOT, type GenFailure } from "./engine.js";
 import type { GeneratedProblem } from "./schema.js";
 
 function parseArgs(argv: string[]): Record<string, string> {
@@ -24,7 +24,7 @@ const seed = args.seed ? Number(args.seed) : Date.now() % 2 ** 31;
 
 const all = loadTemplates(path.join(FACTORY_ROOT, "templates", course));
 const eligible = all.filter(
-  (t) => !t.needs_figure && (difficulty === undefined || t.difficulty === difficulty)
+  (t) => isGenerable(t) && (difficulty === undefined || t.difficulty === difficulty)
 );
 if (eligible.length === 0) {
   console.error(`생성 가능한 템플릿이 없습니다 (course=${course}, difficulty=${difficulty ?? "any"})`);
@@ -61,7 +61,8 @@ fs.writeFileSync(outPath, problems.map((p) => JSON.stringify(p)).join("\n") + "\
 console.log(`✔ ${problems.length}문제 생성 → ${path.relative(process.cwd(), outPath)}`);
 console.log(`  seed=${seed}, course=${course}, difficulty=${difficulty ?? "any"}, 사용 템플릿 풀=${eligible.length}개`);
 for (const p of problems) {
-  console.log(`  - ${p.problem_id} (난이도 ${p.difficulty}) 정답: ${p.answer_value} [${["①", "②", "③", "④", "⑤"][p.answer_index]}]`);
+  const fig = p.figure_svg ? " +그림" : "";
+  console.log(`  - ${p.problem_id} (난이도 ${p.difficulty}${fig}) 정답: ${p.answer_value} [${["①", "②", "③", "④", "⑤"][p.answer_index]}]`);
 }
 if (failures.length > 0) {
   console.warn(`⚠ 생성 실패 템플릿 flag:`);

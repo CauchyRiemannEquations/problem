@@ -5,11 +5,12 @@
 
 **핵심 철학: LLM은 문제를 창작하지 않는다.** 템플릿+파라미터로 생성하고 정답은 코드(mathjs, 유리수 정밀 계산)가 계산한다. 정답 100% 보장.
 
-## 범위 (v0.1)
+## 범위 (v0.1 + 그림 확장)
 
-- 미적분Ⅰ 34장 (`mijeokbun1_ai_rag_cards_v0_1.jsonl`) → 템플릿 34개
-  - 극한과 연속 10 / 미분 13 / 적분 11
-  - 그래프 제시가 본질인 1개(T-M1-DIF-09-a)는 `needs_figure`로 생성 보류
+- 미적분Ⅰ 34장 (`mijeokbun1_ai_rag_cards_v0_1.jsonl`) → 템플릿 36개 (전부 생성 가능)
+  - 극한과 연속 10+2 / 미분 13 / 적분 11
+  - 그림이 본질인 유형은 `figure` 스펙으로 SVG를 자동 생성: T-M1-DIF-09-a(도함수 그래프),
+    T-M1-LIM-01-b(뚫린 점 극한 읽기), T-M1-LIM-02-b(좌·우극한 읽기)
 - 다른 과목은 `templates/<course>/` 디렉토리만 추가하면 동일 파이프라인으로 확장
 
 ## 구조
@@ -18,8 +19,9 @@
 factory/
   templates/mijeokbun1/   # 템플릿 JSON (카드 1장당 1파일)
   src/
-    schema.ts             # ProblemTemplate / ParamSpec / DistractorSpec / GeneratedProblem
+    schema.ts             # ProblemTemplate / ParamSpec / DistractorSpec / FigureSpec / GeneratedProblem
     engine.ts             # 샘플링·제약검사·평가(Fraction)·하드검증·LaTeX 렌더링
+    figure.ts             # 파라미터 기반 결정론적 SVG 그림 생성 (좌표축·곡선·뚫린/닫힌 점·점선·눈금)
     generate.ts           # 생성 CLI
     selftest.ts           # 템플릿당 50회 생성 통과율 + 정답 분포 체크
     review.ts             # 사람 검토용 리포트 생성
@@ -44,7 +46,8 @@ npm run factory:review
 
 - `--seed N` 을 주면 재현 가능한 생성.
 - 출력: `out/{날짜}_{course}.jsonl` — 한 줄 = 한 문제
-  (`stem_latex`, `choices`(5개), `answer_index`, `params_used`, `choice_origins`(오답별 mistake_type))
+  (`stem_latex`, `choices`(5개), `answer_index`, `params_used`, `choice_origins`(오답별 mistake_type),
+  그림 템플릿이면 `figure_svg`(완성된 SVG 문자열))
 
 ## 템플릿 설계 규칙
 
@@ -53,6 +56,9 @@ npm run factory:review
 - mathjs로 심볼릭 적분이 안 되는 유형은 역방향 설계: 답(원시함수·교점·극값 위치)을 먼저 정하고 문제를 역으로 구성.
 - 파라미터는 정수 위주, 절댓값 10 이하. 답이 깔끔하게 떨어지도록 `constraints`로 제어.
 - 하드 검증: 정답≠오답 4개, 오답 상호 중복 없음, 전부 유한 유리수. 위반 시 최대 200회 재샘플, 그래도 실패면 템플릿 flag.
+- 그림: `needs_figure: true` + `figure` 스펙이 있으면 생성 시 SVG를 자동 렌더링해 첨부.
+  스펙의 모든 수치는 파라미터 기반 mathjs 식이라 그림도 문제와 함께 결정론적으로 생성된다.
+  (GeoGebra는 서버용 렌더링 API가 없고 headless 브라우저 + 비상업 라이선스 제약이 있어 채택하지 않음)
 
 ## 하지 않는 것
 

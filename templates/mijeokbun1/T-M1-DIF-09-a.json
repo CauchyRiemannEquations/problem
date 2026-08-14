@@ -6,7 +6,7 @@
   "title": "삼차함수 그래프와 도함수 - 도함수 그래프에서 극대점 읽기",
   "difficulty": 2,
   "problem_format": "mcq5",
-  "stem_latex": "\\text{[그림] 삼차함수 } y = f(x) \\text{ 의 도함수 } y = f'(x) \\text{ 의 그래프는 아래로 볼록한 포물선이고 } x = {r}, \\; x = {s} \\text{ 에서 } x \\text{축과 만난다. } f(x) \\text{ 가 극대가 되는 } x \\text{ 의 값은?}",
+  "stem_latex": "\\text{그림은 삼차함수 } y = f(x) \\text{ 의 도함수 } y = f'(x) \\text{ 의 그래프이다. } f(x) \\text{ 가 극대가 되는 } x \\text{ 의 값은?}",
   "params": [
     { "name": "r", "type": "int", "range": [-3, 1], "exclude": [0] },
     { "name": "s", "type": "int", "range": [-1, 4], "exclude": [0] }
@@ -39,5 +39,17 @@
     "도함수 그래프가 x축 위에 있으면 원래 함수가 증가한다는 연결을 놓친다."
   ],
   "needs_figure": true,
-  "curriculum_check": "도함수 그래프의 부호에서 원함수의 극대·극소를 읽는 것은 미적분Ⅰ '도함수의 활용' 내용이다. 그래프 제시가 본질이므로 v0.1에서는 needs_figure로 생성 보류."
+  "figure": {
+    "window": {
+      "x": ["r - 2", "s + 2"],
+      "y": ["-(s - r)^2/4 - max(1, (s - r)^2/16) - 1", "(s - r)^2/4 + 2"]
+    },
+    "elements": [
+      { "kind": "poly", "coeffs": ["r*s", "-(r + s)", "1"] },
+      { "kind": "xtick", "at": "r" },
+      { "kind": "xtick", "at": "s" },
+      { "kind": "label", "at": ["(r + s)/2", "-(s - r)^2/4 - max(1, (s - r)^2/16)"], "text": "y = f'(x)", "anchor": "middle" }
+    ]
+  },
+  "curriculum_check": "도함수 그래프의 부호(+→-)에서 원함수의 극대를 읽는 것은 미적분Ⅰ '도함수의 활용' 내용이다. 그림은 f'(x)=(x-r)(x-s) 포물선을 파라미터에서 결정론적으로 SVG 렌더링한다."
 }

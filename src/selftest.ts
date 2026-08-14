@@ -5,7 +5,7 @@
  */
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { loadTemplates, generateProblem, mulberry32, FACTORY_ROOT } from "./engine.js";
+import { loadTemplates, generateProblem, mulberry32, isGenerable, FACTORY_ROOT } from "./engine.js";
 
 function parseArgs(argv: string[]): Record<string, string> {
   const out: Record<string, string> = {};
@@ -21,8 +21,8 @@ const N = Number(args.n ?? 50);
 const seedBase = Number(args.seed ?? 20260814);
 
 const all = loadTemplates(path.join(FACTORY_ROOT, "templates", course));
-const testable = all.filter((t) => !t.needs_figure);
-const skipped = all.filter((t) => t.needs_figure);
+const testable = all.filter(isGenerable);
+const skipped = all.filter((t) => !isGenerable(t));
 
 interface Row {
   template_id: string;
@@ -71,7 +71,7 @@ for (const r of rows) {
   );
   if (r.fail > 0) console.log(`    └ 마지막 실패 사유: ${r.lastFailReason}`);
 }
-console.log(`needs_figure로 생성 보류(테스트 제외): ${skipped.map((t) => t.template_id).join(", ") || "없음"}`);
+console.log(`needs_figure(그림 스펙 없음)로 생성 보류: ${skipped.map((t) => t.template_id).join(", ") || "없음"}`);
 
 // 실패 템플릿 격리 기록
 const reviewDir = path.join(FACTORY_ROOT, "review");
@@ -82,7 +82,7 @@ const lines: string[] = [
   `# selftest 실패/경고 템플릿 (${course} v0.1)`,
   ``,
   `- 실행: 템플릿당 ${N}회 샘플 생성, seed base ${seedBase}`,
-  `- 테스트 대상 ${testable.length}개 / needs_figure 보류 ${skipped.length}개`,
+  `- 테스트 대상 ${testable.length}개 / 그림 스펙 없는 needs_figure 보류 ${skipped.length}개`,
   ``,
 ];
 if (failedRows.length === 0) {

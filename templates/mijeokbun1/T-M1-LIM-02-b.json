@@ -1,0 +1,69 @@
+{
+  "template_id": "T-M1-LIM-02-b",
+  "card_id": "M1-LIM-02",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "좌극한과 우극한 - 그래프에서 한쪽 극한 읽기",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{그림은 함수 } y = f(x) \\text{ 의 그래프이다. } \\lim_{x \\to {p}^{-}} f(x) + \\lim_{x \\to {p}^{+}} f(x) \\text{ 의 값은?}",
+  "params": [
+    { "name": "a", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "b", "type": "choice", "choices": [-2, -1, 1, 2] },
+    { "name": "c", "type": "int", "range": [-4, 4] },
+    { "name": "p", "type": "int", "range": [-2, 2], "exclude": [0] }
+  ],
+  "constraints": [
+    "p + a != b*p + c",
+    "p + a != 0",
+    "b*p + c != 0",
+    "abs((p + a) - (b*p + c)) >= 2",
+    "b*p + c != 3*(p + a)",
+    "b*p + c != -(p + a)"
+  ],
+  "answer_expr": "(p + a) + (b*p + c)",
+  "distractors": [
+    {
+      "expr": "2*(p + a)",
+      "mistake_type": "한쪽 값만 보고 극한값이 있다고 판단한다 → 좌극한 값을 양쪽 극한으로 사용"
+    },
+    {
+      "expr": "2*(b*p + c)",
+      "mistake_type": "그래프에서 열린 점과 닫힌 점만 보고 좌우 흐름을 보지 않는다 → 닫힌 점의 값을 양쪽 극한으로 사용"
+    },
+    {
+      "expr": "(b*p + c) - (p + a)",
+      "mistake_type": "generic: 합 대신 차를 계산"
+    },
+    {
+      "expr": "p + a",
+      "mistake_type": "generic: 좌극한만 계산하고 우극한을 누락"
+    }
+  ],
+  "source_mistakes": [
+    "한쪽 값만 보고 극한값이 있다고 판단한다.",
+    "그래프에서 열린 점과 닫힌 점만 보고 좌우 흐름을 보지 않는다."
+  ],
+  "needs_figure": true,
+  "figure": {
+    "window": {
+      "x": ["min(p, 0) - 2.5", "max(p, 0) + 2.5"],
+      "y": ["min(min(p + a, b*p + c), 0) - 2", "max(max(p + a, b*p + c), 0) + 2"]
+    },
+    "elements": [
+      { "kind": "poly", "coeffs": ["a", "1"], "domain": ["xmin", "p"] },
+      { "kind": "poly", "coeffs": ["c", "b"], "domain": ["p", "xmax"] },
+      { "kind": "segment", "from": ["p", "0"], "to": ["p", "p + a"], "dashed": true },
+      { "kind": "segment", "from": ["p", "0"], "to": ["p", "b*p + c"], "dashed": true },
+      { "kind": "segment", "from": ["p", "p + a"], "to": ["0", "p + a"], "dashed": true },
+      { "kind": "segment", "from": ["p", "b*p + c"], "to": ["0", "b*p + c"], "dashed": true },
+      { "kind": "point", "at": ["p", "p + a"], "open": true },
+      { "kind": "point", "at": ["p", "b*p + c"] },
+      { "kind": "xtick", "at": "p" },
+      { "kind": "ytick", "at": "p + a" },
+      { "kind": "ytick", "at": "b*p + c" },
+      { "kind": "label", "at": ["min(p, 0) - 2.1", "max(max(p + a, b*p + c), 0) + 1.2"], "text": "y = f(x)" }
+    ]
+  },
+  "curriculum_check": "그래프의 열린 점/닫힌 점에서 좌극한·우극한을 읽는 것은 미적분Ⅰ '함수의 극한' 대표 유형이며, 그림은 조각 일차함수를 파라미터에서 결정론적으로 렌더링한다."
+}

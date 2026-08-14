@@ -6,8 +6,14 @@ import { create, all } from "mathjs";
 import * as fs from "node:fs";
 import * as path from "node:path";
 import type { ProblemTemplate, ParamSpec, GeneratedProblem } from "./schema.js";
+import { renderFigure } from "./figure.js";
 
 export const math = create(all, {});
+
+/** 생성 가능 여부: 그림이 필요 없거나, 그림 스펙이 있어 자동 렌더링 가능한 템플릿 */
+export function isGenerable(t: ProblemTemplate): boolean {
+  return !t.needs_figure || !!t.figure;
+}
 
 // ---------- RNG (재현 가능한 시드 기반) ----------
 export function mulberry32(seed: number): () => number {
@@ -192,6 +198,15 @@ export function generateProblem(
 
     // 4) 렌더링 + 셔플
     const stem = renderStem(t.stem_latex, raw);
+    let figure_svg: string | undefined;
+    if (t.figure) {
+      try {
+        figure_svg = renderFigure(t.figure, raw);
+      } catch (e: any) {
+        lastReason = `그림 렌더링 오류: ${e.message}`;
+        continue;
+      }
+    }
     const entries = [
       { latex: fracToLatex(answer), origin: "answer" },
       ...dvals.map((d, i) => ({ latex: fracToLatex(d!), origin: t.distractors[i].mistake_type })),
@@ -215,6 +230,7 @@ export function generateProblem(
       answer_value: fracToLatex(answer),
       params_used: raw,
       choice_origins: entries.map((e) => e.origin),
+      ...(figure_svg ? { figure_svg } : {}),
     };
     return { problem, failure: null };
   }
@@ -236,7 +252,7 @@ export function loadTemplates(courseDir: string): ProblemTemplate[] {
     for (const field of ["template_id", "card_id", "stem_latex", "answer_expr"] as const) {
       if (!t[field]) throw new Error(`${f}: 필수 필드 누락 ${field}`);
     }
-    if (!t.needs_figure && t.distractors.length !== 4) {
+    if (t.distractors.length !== 4) {
       throw new Error(`${f}: 오답은 정확히 4개여야 함 (현재 ${t.distractors.length})`);
     }
     return t;
