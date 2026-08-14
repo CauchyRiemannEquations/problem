@@ -1,1 +1,4 @@
 node_modules/
+dist/
+src/templates_data.ts
+figcheck*.tmp.mjs

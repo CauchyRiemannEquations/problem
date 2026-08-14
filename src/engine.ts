@@ -259,4 +259,12 @@ export function loadTemplates(courseDir: string): ProblemTemplate[] {
   });
 }
 
-export const FACTORY_ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+export const FACTORY_ROOT = (() => {
+  try {
+    // tsx/ESM 실행 시: src/의 부모 = factory 루트
+    return path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+  } catch {
+    // exe 번들(CJS)에서는 import.meta가 없음 — 파일 로딩 대신 임베딩 데이터를 쓰므로 cwd로 충분
+    return process.cwd();
+  }
+})();
