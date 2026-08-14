@@ -13,7 +13,8 @@
   ],
   "constraints": [
     "r < s",
-    "r + s != 0"
+    "r + s != 0",
+    "s - r >= 2"
   ],
   "answer_expr": "(s - r)^3/6",
   "distractors": [
