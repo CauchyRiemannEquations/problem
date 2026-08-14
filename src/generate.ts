@@ -62,6 +62,10 @@ while (problems.length < count && guard < count * 30) {
   } else if (failure) failures.push(failure);
 }
 
+const UNIT_ORDER = ["함수의 극한과 연속", "미분", "적분"];
+const unitRank = (u: string) => { const i = UNIT_ORDER.findIndex((x) => u.includes(x) || x.includes(u)); return i === -1 ? UNIT_ORDER.length : i; };
+problems.sort((x, y) => unitRank(x.unit) - unitRank(y.unit));
+
 const date = new Date().toISOString().slice(0, 10);
 const outDir = path.join(FACTORY_ROOT, "out");
 fs.mkdirSync(outDir, { recursive: true });

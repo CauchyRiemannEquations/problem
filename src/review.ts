@@ -20,7 +20,11 @@ const args = parseArgs(process.argv.slice(2));
 const course = args.course ?? "mijeokbun1";
 const seed = Number(args.seed ?? 777);
 
-const all = loadTemplates(path.join(FACTORY_ROOT, "templates", course));
+const UNIT_ORDER = ["함수의 극한과 연속", "미분", "적분"];
+const unitRank = (u: string) => { const i = UNIT_ORDER.findIndex((x) => u.includes(x) || x.includes(u)); return i === -1 ? UNIT_ORDER.length : i; };
+const all = loadTemplates(path.join(FACTORY_ROOT, "templates", course)).sort(
+  (a, b) => unitRank(a.unit) - unitRank(b.unit) || a.template_id.localeCompare(b.template_id)
+);
 const generable = all.filter(isGenerable);
 const deferred = all.filter((t) => !isGenerable(t));
 const withFigure = all.filter((t) => isGenerable(t) && t.figure);

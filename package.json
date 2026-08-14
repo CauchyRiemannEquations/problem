@@ -1,27 +1,58 @@
 {
   "name": "bamsam-problem-factory",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "밤샘 문제공장 — 개념카드 기반 파라메트릭 문제 생성 파이프라인 v0.1",
   "scripts": {
-    "factory:gen": "tsx src/generate.ts",
     "factory:selftest": "tsx src/selftest.ts",
     "factory:review": "tsx src/review.ts",
     "factory:html": "tsx src/render_html.ts",
     "factory:embed": "tsx scripts/embed_templates.ts",
     "factory:app": "npm run factory:embed && tsx src/app.ts",
-    "build:bundle": "npm run factory:embed && esbuild src/app.ts --bundle --platform=node --format=cjs \"--define:PACKAGE_VERSION='3.2.1'\" --outfile=dist/app.cjs"
+    "build:bundle": "npm run factory:embed && node scripts/build_bundle.mjs",
+    "app:electron": "npm run build:bundle && electron .",
+    "factory:gen": "tsx src/generate.ts"
   },
   "dependencies": {
-    "mathjax-full": "^3.2.1",
-    "mathjs": "^13.2.3"
+    "electron-updater": "^6.3.9"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
-    "@yao-pkg/pkg": "^6.22.0",
     "esbuild": "^0.28.2",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "mathjs": "^13.2.3",
+    "mathjax-full": "^3.2.1",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "main": "electron/main.cjs",
+  "build": {
+    "appId": "kr.bamsam.factory",
+    "productName": "밤샘 문제공장",
+    "files": [
+      "electron/**",
+      "dist/app.cjs",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "electron/icon.png",
+      "artifactName": "BamsamFactory-Setup-${version}.exe"
+    },
+    "nsis": {
+      "oneClick": true,
+      "runAfterFinish": true
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "CauchyRiemannEquations",
+      "repo": "problem",
+      "releaseType": "release"
+    }
   }
 }

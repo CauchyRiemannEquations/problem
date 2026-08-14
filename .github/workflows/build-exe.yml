@@ -1,50 +1,52 @@
-name: build-exe
+name: build-app
 
 on:
   workflow_dispatch:
   push:
-    tags: ["v*"]
     branches: ["main"]
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+    env:
+      ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - uses: oven-sh/setup-bun@v2
       - run: npm ci
-      - run: npm run factory:embed
-      - name: Compile executables (bun)
+      - run: npm run factory:selftest
+      - run: npm run build:bundle
+      - name: Smoke test (server bundle)
         run: |
-          mkdir -p dist
-          bun build src/app.ts --compile --define "PACKAGE_VERSION='3.2.1'" --target=bun-windows-x64 --outfile dist/BamsamFactory-win.exe
-          bun build src/app.ts --compile --define "PACKAGE_VERSION='3.2.1'" --target=bun-linux-x64 --outfile dist/BamsamFactory-linux
-          bun build src/app.ts --compile --define "PACKAGE_VERSION='3.2.1'" --target=bun-darwin-arm64 --outfile dist/BamsamFactory-macos
-      - name: Smoke test (linux binary)
-        run: |
-          PORT=8999 ./dist/BamsamFactory-linux &
+          PORT=8999 BAMSAM_NO_OPEN=1 node dist/app.cjs &
           sleep 3
           curl -sf "http://localhost:8999/" -o /dev/null
           curl -sf "http://localhost:8999/worksheet?course=mijeokbun1&d1=on&d2=on&count=5&key=on" -o /tmp/ws.html
           grep -q "정답표" /tmp/ws.html && echo "smoke OK"
           kill %1
+
+  build-win:
+    needs: test
+    runs-on: windows-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run build:bundle
+      - name: Set build version (0.2.<run>)
+        run: npm version --no-git-tag-version 0.2.${{ github.run_number }}
+      - name: Build & publish installer (auto-update feed)
+        run: npx electron-builder --win --publish always
       - uses: actions/upload-artifact@v4
         with:
-          name: executables
-          path: dist/BamsamFactory*
-      - name: Attach to release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v0.1.0
-          name: "밤샘 문제공장 v0.1.0"
-          body: |
-            밤샘 문제공장 GUI 실행파일.
-            - Windows: BamsamFactory-win.exe 다운로드 후 실행 → 브라우저가 열리면 조건 선택 → 문제지 생성 → [PDF로 저장/인쇄]
-            - macOS(Apple Silicon): BamsamFactory-macos / Linux: BamsamFactory-linux
-          files: dist/BamsamFactory*
+          name: installer
+          path: release/BamsamFactory-Setup-*.exe

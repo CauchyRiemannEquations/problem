@@ -14,9 +14,15 @@ import type { GeneratedProblem, ProblemTemplate } from "./schema.js";
 
 const PORT = Number(process.env.PORT ?? 8977);
 const COURSE_LABEL: Record<string, string> = { mijeokbun1: "미적분Ⅰ" };
+/** 교육과정 단원 순서 (미적분Ⅰ: 극한과 연속 → 미분 → 적분) */
+const UNIT_ORDER = ["함수의 극한과 연속", "미분", "적분"];
+export function unitRank(unit: string): number {
+  const i = UNIT_ORDER.findIndex((u) => unit.includes(u) || u.includes(unit));
+  return i === -1 ? UNIT_ORDER.length : i;
+}
 
 function unitsOf(course: string): string[] {
-  return [...new Set((TEMPLATES[course] ?? []).map((t) => t.unit))];
+  return [...new Set((TEMPLATES[course] ?? []).map((t) => t.unit))].sort((a, b) => unitRank(a) - unitRank(b));
 }
 
 function formPage(): string {
@@ -104,6 +110,8 @@ function makeWorksheet(q: URLSearchParams): { html: string } | { error: string }
     }
   }
 
+  // 문제지 배열은 교육과정 단원 순서(극한과 연속 → 미분 → 적분)로 정렬
+  problems.sort((x, y) => unitRank(x.unit) - unitRank(y.unit));
   const dLabel = [diffs.includes(1) ? "하" : "", diffs.includes(2) ? "중" : "", diffs.includes(3) ? "상" : ""].filter(Boolean).join("·");
   const title = `${COURSE_LABEL[course] ?? course} ${unit ?? "전 단원"} — 연습 ${problems.length}제 (난이도 ${dLabel})`;
   const html = buildWorksheetHTML(problems, {
@@ -161,6 +169,8 @@ function openAppWindow(addr: string) {
 server.listen(PORT, "127.0.0.1", () => {
   const addr = `http://localhost:${PORT}`;
   console.log(`밤샘 문제공장 실행 중 → ${addr}`);
-  console.log(`이 검은 창은 프로그램 본체입니다. 닫으면 앱이 종료됩니다.`);
-  openAppWindow(addr);
+  if (process.env.BAMSAM_NO_OPEN !== "1") {
+    console.log(`이 검은 창은 프로그램 본체입니다. 닫으면 앱이 종료됩니다.`);
+    openAppWindow(addr);
+  }
 });
