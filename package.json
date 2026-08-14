@@ -7,9 +7,11 @@
   "scripts": {
     "factory:gen": "tsx src/generate.ts",
     "factory:selftest": "tsx src/selftest.ts",
-    "factory:review": "tsx src/review.ts"
+    "factory:review": "tsx src/review.ts",
+    "factory:html": "tsx src/render_html.ts"
   },
   "dependencies": {
+    "mathjax-full": "^3.2.1",
     "mathjs": "^13.2.3"
   },
   "devDependencies": {

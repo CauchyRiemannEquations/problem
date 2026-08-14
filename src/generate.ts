@@ -1,7 +1,7 @@
 /**
  * 문제 생성 CLI
- * 사용: npm run factory:gen -- --course mijeokbun1 --count 5 [--difficulty 2] [--seed 42]
- * 출력: out/{YYYY-MM-DD}_{course}.jsonl
+ * 사용: npm run factory:gen -- --course mijeokbun1 --count 5 [--difficulty 2 | --difficulty 1,2] [--unit 극한] [--seed 42] [--tag 파일접미사]
+ * 출력: out/{YYYY-MM-DD}_{course}{_tag}.jsonl
  */
 import * as fs from "node:fs";
 import * as path from "node:path";
@@ -19,15 +19,20 @@ function parseArgs(argv: string[]): Record<string, string> {
 const args = parseArgs(process.argv.slice(2));
 const course = args.course ?? "mijeokbun1";
 const count = Number(args.count ?? 5);
-const difficulty = args.difficulty ? Number(args.difficulty) : undefined;
+const difficulties = args.difficulty ? args.difficulty.split(",").map(Number) : undefined;
+const unit = args.unit; // 단원명 부분 일치 필터 (예: "극한")
+const tag = args.tag ? `_${args.tag}` : "";
 const seed = args.seed ? Number(args.seed) : Date.now() % 2 ** 31;
 
 const all = loadTemplates(path.join(FACTORY_ROOT, "templates", course));
 const eligible = all.filter(
-  (t) => isGenerable(t) && (difficulty === undefined || t.difficulty === difficulty)
+  (t) =>
+    isGenerable(t) &&
+    (difficulties === undefined || difficulties.includes(t.difficulty)) &&
+    (unit === undefined || t.unit.includes(unit))
 );
 if (eligible.length === 0) {
-  console.error(`생성 가능한 템플릿이 없습니다 (course=${course}, difficulty=${difficulty ?? "any"})`);
+  console.error(`생성 가능한 템플릿이 없습니다 (course=${course}, difficulty=${difficulties?.join(",") ?? "any"}, unit=${unit ?? "any"})`);
   process.exit(1);
 }
 
@@ -55,11 +60,11 @@ while (problems.length < count && guard < count * 10) {
 const date = new Date().toISOString().slice(0, 10);
 const outDir = path.join(FACTORY_ROOT, "out");
 fs.mkdirSync(outDir, { recursive: true });
-const outPath = path.join(outDir, `${date}_${course}.jsonl`);
+const outPath = path.join(outDir, `${date}_${course}${tag}.jsonl`);
 fs.writeFileSync(outPath, problems.map((p) => JSON.stringify(p)).join("\n") + "\n", "utf-8");
 
 console.log(`✔ ${problems.length}문제 생성 → ${path.relative(process.cwd(), outPath)}`);
-console.log(`  seed=${seed}, course=${course}, difficulty=${difficulty ?? "any"}, 사용 템플릿 풀=${eligible.length}개`);
+console.log(`  seed=${seed}, course=${course}, difficulty=${difficulties?.join(",") ?? "any"}, unit=${unit ?? "any"}, 사용 템플릿 풀=${eligible.length}개`);
 for (const p of problems) {
   const fig = p.figure_svg ? " +그림" : "";
   console.log(`  - ${p.problem_id} (난이도 ${p.difficulty}${fig}) 정답: ${p.answer_value} [${["①", "②", "③", "④", "⑤"][p.answer_index]}]`);
