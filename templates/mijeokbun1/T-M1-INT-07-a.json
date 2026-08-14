@@ -8,7 +8,14 @@
   "problem_format": "mcq5",
   "stem_latex": "\\text{곡선 } y = x(x - {a}) \\text{ 와 } x \\text{축으로 둘러싸인 부분의 넓이는?}",
   "params": [
-    { "name": "a", "type": "int", "range": [2, 6] }
+    {
+      "name": "a",
+      "type": "int",
+      "range": [
+        2,
+        9
+      ]
+    }
   ],
   "constraints": [],
   "answer_expr": "a^3/6",
@@ -37,14 +44,52 @@
   "needs_figure": true,
   "figure": {
     "window": {
-      "x": ["-1.4", "a + 1.6"],
-      "y": ["-a^2/4 - 1", "max(2, a^2/8)"]
+      "x": [
+        "-1.4",
+        "a + 1.6"
+      ],
+      "y": [
+        "-a^2/4 - 1",
+        "max(2, a^2/8)"
+      ]
     },
     "elements": [
-      { "kind": "region", "upper": ["0"], "lower": ["0", "-a", "1"], "domain": ["0", "a"] },
-      { "kind": "poly", "coeffs": ["0", "-a", "1"] },
-      { "kind": "xtick", "at": "a" },
-      { "kind": "label", "at": ["a + 0.2", "max(2, a^2/8) - 0.35"], "text": "y = x(x - {a})", "anchor": "end" }
+      {
+        "kind": "region",
+        "upper": [
+          "0"
+        ],
+        "lower": [
+          "0",
+          "-a",
+          "1"
+        ],
+        "domain": [
+          "0",
+          "a"
+        ]
+      },
+      {
+        "kind": "poly",
+        "coeffs": [
+          "0",
+          "-a",
+          "1"
+        ]
+      },
+      {
+        "kind": "xtick",
+        "at": "a"
+      },
+      {
+        "kind": "label",
+        "at": [
+          "a + 0.2",
+          "max(2, a^2/8) - 0.35"
+        ],
+        "text": "y = x(x - {a})",
+        "anchor": "end"
+      }
     ]
   },
   "curriculum_check": "f(x)≤0인 구간에서 넓이 = -∫f dx 처리는 미적분Ⅰ '넓이' 기본 유형이며, x(x-a)는 [0,a]에서 항상 0 이하이므로 구간 분할이 필요 없는 형태로 설계했다. 그림은 곡선과 x축 사이 영역을 빗금으로 표시한다."

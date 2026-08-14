@@ -1,0 +1,43 @@
+{
+  "template_id": "T-M1-DIF-08-b",
+  "card_id": "M1-DIF-08",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "극대와 극소 - 극값 조건에서 계수 역산",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{함수 } f(x) = x^3 + {a}x^2 + bx \\text{ 가 } x = {p} \\text{ 에서 극값을 가질 때, 상수 } b \\text{ 의 값은?}",
+  "params": [
+    { "name": "a", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "p", "type": "int", "range": [-3, 3], "exclude": [0] }
+  ],
+  "constraints": [
+    "3*p + a != 0",
+    "3*p + 2*a != 0"
+  ],
+  "answer_expr": "-3*p^2 - 2*a*p",
+  "distractors": [
+    {
+      "expr": "3*p^2 + 2*a*p",
+      "mistake_type": "generic: f'({p})=0 이항 과정의 부호 실수"
+    },
+    {
+      "expr": "-3*p^2 + 2*a*p",
+      "mistake_type": "generic: 일부 항만 부호를 바꿔 이항"
+    },
+    {
+      "expr": "-6*p - 2*a",
+      "mistake_type": "도함수에 대입한 값을 극값으로 쓴다 → 이계도함수 조건과 혼동"
+    },
+    {
+      "expr": "-p^3 - a*p^2",
+      "mistake_type": "f'(x)=0이면 무조건 극값이 있다고 생각한다 → f({p})=0으로 잘못 세움"
+    }
+  ],
+  "source_mistakes": [
+    "f'(x)=0이면 무조건 극값이 있다고 생각한다.",
+    "도함수에 대입한 값을 극값으로 쓴다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "x=p에서 극값 ⇒ f'(p)=0 조건으로 미정계수를 구하는 것은 미적분Ⅰ '극대와 극소' 대표 유형이다. f''(p)≠0 제약으로 진짜 극값이 되도록 보장했다."
+}

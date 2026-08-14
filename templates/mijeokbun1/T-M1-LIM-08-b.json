@@ -1,0 +1,41 @@
+{
+  "template_id": "T-M1-LIM-08-b",
+  "card_id": "M1-LIM-08",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "함수의 연속 - 불연속점의 개수 판정",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{함수 } f(x) = \\dfrac{1}{x^2 + {-(r+s)}x + {r*s}} \\text{ 가 불연속이 되는 } x \\text{ 의 값의 개수는?}",
+  "params": [
+    { "name": "r", "type": "int", "range": [-3, 3], "exclude": [0] },
+    { "name": "s", "type": "int", "range": [-3, 3], "exclude": [0] }
+  ],
+  "constraints": [
+    "r + s != 0"
+  ],
+  "answer_expr": "r == s ? 1 : 2",
+  "distractors": [
+    {
+      "expr": "r == s ? 2 : 1",
+      "mistake_type": "조각함수에서 경계값의 식을 잘못 사용한다 → 중근/서로 다른 근 판정을 반대로 함"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "함수값만 있으면 연속이라고 생각한다 → 분모가 0이 되는 점을 놓침"
+    },
+    {
+      "expr": "3",
+      "mistake_type": "generic: 불연속점 개수를 잘못 셈"
+    },
+    {
+      "expr": "4",
+      "mistake_type": "generic: 불연속점 개수를 잘못 셈"
+    }
+  ],
+  "source_mistakes": [
+    "함수값만 있으면 연속이라고 생각한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "분모가 0이 되는 점에서 정의되지 않아 불연속이라는 판정은 미적분Ⅰ '함수의 연속' 내용이며, 이차식의 근 판별은 선수과목 범위이다."
+}

@@ -8,8 +8,28 @@
   "problem_format": "mcq5",
   "stem_latex": "f(x) = \\begin{cases} \\dfrac{x^2 + {-(p+q)}x + {p*q}}{x - {p}} & (x \\ne {p}) \\\\ k & (x = {p}) \\end{cases} \\text{ 가 } x = {p} \\text{ 에서 연속일 때, 상수 } k \\text{ 의 값은?}",
   "params": [
-    { "name": "p", "type": "int", "range": [-4, 4], "exclude": [0] },
-    { "name": "q", "type": "int", "range": [-4, 4], "exclude": [0] }
+    {
+      "name": "p",
+      "type": "int",
+      "range": [
+        -6,
+        6
+      ],
+      "exclude": [
+        0
+      ]
+    },
+    {
+      "name": "q",
+      "type": "int",
+      "range": [
+        -6,
+        6
+      ],
+      "exclude": [
+        0
+      ]
+    }
   ],
   "constraints": [
     "p != q",

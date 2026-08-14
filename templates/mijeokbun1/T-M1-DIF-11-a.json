@@ -8,7 +8,14 @@
   "problem_format": "mcq5",
   "stem_latex": "x \\ge 0 \\text{ 인 모든 실수 } x \\text{ 에 대하여 부등식 } x^3 - {3*a^2}x + k \\ge 0 \\text{ 이 성립하도록 하는 실수 } k \\text{ 의 최솟값은?}",
   "params": [
-    { "name": "a", "type": "int", "range": [1, 3] }
+    {
+      "name": "a",
+      "type": "int",
+      "range": [
+        1,
+        4
+      ]
+    }
   ],
   "constraints": [],
   "answer_expr": "2*a^3",

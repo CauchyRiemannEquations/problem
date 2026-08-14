@@ -1,0 +1,42 @@
+{
+  "template_id": "T-M1-LIM-07-b",
+  "card_id": "M1-LIM-07",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "극한값이 존재하지 않는 경우 - 좌·우극한의 차 분석",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "f(x) = \\dfrac{{a}x + {b}\\left| x \\right|}{x} \\text{ 일 때, } \\lim_{x \\to 0^{+}} f(x) - \\lim_{x \\to 0^{-}} f(x) \\text{ 의 값은?}",
+  "params": [
+    { "name": "a", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "b", "type": "int", "range": [-4, 4], "exclude": [0] }
+  ],
+  "constraints": [
+    "a != b"
+  ],
+  "answer_expr": "2*b",
+  "distractors": [
+    {
+      "expr": "b",
+      "mistake_type": "한쪽 극한만 보고 판단한다 → 우극한 쪽 |x| 항만 계산"
+    },
+    {
+      "expr": "-2*b",
+      "mistake_type": "generic: 좌·우극한을 반대로 빼서 부호가 뒤집힘"
+    },
+    {
+      "expr": "2*a",
+      "mistake_type": "함수값이 있으면 극한값도 있다고 생각한다 → |x| 항과 x 항의 역할을 혼동"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "generic: 좌·우극한이 같다고 착각"
+    }
+  ],
+  "source_mistakes": [
+    "한쪽 극한만 보고 판단한다.",
+    "함수값이 있으면 극한값도 있다고 생각한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "|x|/x 꼴에서 좌·우극한이 달라 극한이 존재하지 않는 상황의 정량 분석은 미적분Ⅰ '함수의 극한' 범위이다."
+}

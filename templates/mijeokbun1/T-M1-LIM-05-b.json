@@ -1,0 +1,48 @@
+{
+  "template_id": "T-M1-LIM-05-b",
+  "card_id": "M1-LIM-05",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "인수분해를 이용한 극한 - 분자·분모 모두 인수분해",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\lim_{x \\to {p}} \\dfrac{x^2 + {-(p+q)}x + {p*q}}{x^2 + {-(p+r)}x + {p*r}} \\text{ 의 값은?}",
+  "params": [
+    { "name": "p", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "q", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "r", "type": "int", "range": [-4, 4], "exclude": [0] }
+  ],
+  "constraints": [
+    "p != q",
+    "p != r",
+    "q != r",
+    "p + q != 0",
+    "p + r != 0",
+    "q + r != 2*p"
+  ],
+  "answer_expr": "(p - q)/(p - r)",
+  "distractors": [
+    {
+      "expr": "(p - r)/(p - q)",
+      "mistake_type": "약분 후 남은 식에 대입하지 않는다 → 분자·분모를 뒤바꿔 계산"
+    },
+    {
+      "expr": "1",
+      "mistake_type": "generic: 공통인수 약분 후 남은 식도 같다고 착각"
+    },
+    {
+      "expr": "q/r",
+      "mistake_type": "부호를 잘못 잡아 공통인수를 놓친다 → 남은 근끼리의 비로 계산"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "generic: 0/0꼴을 0으로 답함"
+    }
+  ],
+  "source_mistakes": [
+    "부호를 잘못 잡아 공통인수를 놓친다.",
+    "약분 후 남은 식에 대입하지 않는다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "분자·분모를 각각 인수분해해 공통인수 (x-p)를 약분하는 0/0꼴 극한은 미적분Ⅰ '함수의 극한' 심화 기본 유형이다."
+}

@@ -8,8 +8,22 @@
   "problem_format": "mcq5",
   "stem_latex": "\\lim_{x \\to {p}} \\dfrac{x^2 + {-(p+q)}x + {p*q}}{x - {p}} \\text{ 의 값은?}",
   "params": [
-    { "name": "p", "type": "int", "range": [-4, 4] },
-    { "name": "q", "type": "int", "range": [-4, 4] }
+    {
+      "name": "p",
+      "type": "int",
+      "range": [
+        -6,
+        6
+      ]
+    },
+    {
+      "name": "q",
+      "type": "int",
+      "range": [
+        -6,
+        6
+      ]
+    }
   ],
   "constraints": [
     "p != 0",

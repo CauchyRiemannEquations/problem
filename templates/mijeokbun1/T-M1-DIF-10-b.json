@@ -1,0 +1,39 @@
+{
+  "template_id": "T-M1-DIF-10-b",
+  "card_id": "M1-DIF-10",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "방정식의 실근 개수 - 세 실근을 갖는 정수 k의 개수",
+  "difficulty": 3,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{방정식 } x^3 - {3*a^2}x - k = 0 \\text{ 이 서로 다른 세 실근을 갖도록 하는 정수 } k \\text{ 의 개수는?}",
+  "params": [
+    { "name": "a", "type": "choice", "choices": [1, 2] }
+  ],
+  "constraints": [],
+  "answer_expr": "4*a^3 - 1",
+  "distractors": [
+    {
+      "expr": "4*a^3 + 1",
+      "mistake_type": "접하는 경우를 두 근으로 세거나 빠뜨린다 → 경계 k=±2a³(중근 발생)까지 포함해 셈"
+    },
+    {
+      "expr": "4*a^3",
+      "mistake_type": "generic: 한쪽 경계만 포함해 셈"
+    },
+    {
+      "expr": "2*a^3 - 1",
+      "mistake_type": "극댓값/극솟값이 아니라 극점의 x좌표와 비교한다 → 범위를 절반만 잡음"
+    },
+    {
+      "expr": "2*a^3",
+      "mistake_type": "generic: 범위 계산 실수"
+    }
+  ],
+  "source_mistakes": [
+    "극댓값/극솟값이 아니라 극점의 x좌표와 비교한다.",
+    "접하는 경우를 두 근으로 세거나 빠뜨린다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "세 실근 조건 ⇔ 극솟값 < 0 < 극댓값 ⇔ -2a³ < k < 2a³, 정수 개수 4a³-1 — 미적분Ⅰ '방정식에의 활용' 심화 유형이다."
+}

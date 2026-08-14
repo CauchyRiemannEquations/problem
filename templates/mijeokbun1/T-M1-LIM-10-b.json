@@ -1,0 +1,39 @@
+{
+  "template_id": "T-M1-LIM-10-b",
+  "card_id": "M1-LIM-10",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "사잇값 정리 - 실근을 보장하는 정수 개수",
+  "difficulty": 3,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{연속함수 } f(x) = x^3 + x + a \\text{ 에 대하여, 방정식 } f(x) = 0 \\text{ 이 열린구간 } ({m}, {m+1}) \\text{ 에서 실근을 갖는 것이 보장되도록 } f({m})f({m+1}) < 0 \\text{ 을 만족시키는 정수 } a \\text{ 의 개수는?}",
+  "params": [
+    { "name": "m", "type": "int", "range": [-3, 3] }
+  ],
+  "constraints": [],
+  "answer_expr": "3*m^2 + 3*m + 1",
+  "distractors": [
+    {
+      "expr": "3*m^2 + 3*m + 3",
+      "mistake_type": "f(a)와 f(b)의 부호만 보고 기계적으로 판단한다 → 경계(f=0)까지 포함해 셈"
+    },
+    {
+      "expr": "3*m^2 + 3*m + 2",
+      "mistake_type": "generic: 한쪽 경계만 포함해 셈"
+    },
+    {
+      "expr": "3*m^2 + 3*m - 1",
+      "mistake_type": "generic: 양쪽 경계를 이중으로 제외"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "연속 조건을 확인하지 않는다 → 조건을 만족하는 a가 없다고 판단"
+    }
+  ],
+  "source_mistakes": [
+    "연속 조건을 확인하지 않는다.",
+    "f(a)와 f(b)의 부호만 보고 기계적으로 판단한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "f(m)f(m+1)<0이면 (m,m+1)에 실근이 존재한다는 사잇값 정리와 부등식의 정수해 개수 세기의 결합 — 미적분Ⅰ '함수의 연속' 심화 유형. 개수 = (f(m+1)-f(m))-1 = 3m²+3m+1."
+}

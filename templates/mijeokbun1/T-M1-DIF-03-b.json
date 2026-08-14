@@ -1,0 +1,42 @@
+{
+  "template_id": "T-M1-DIF-03-b",
+  "card_id": "M1-DIF-03",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "미분가능성과 연속 - 절댓값 함수의 미분 불가능 점",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{함수 } f(x) = \\left| x^2 + {-(r+s)}x + {r*s} \\right| \\text{ 가 미분가능하지 않은 } x \\text{ 의 값의 개수는?}",
+  "params": [
+    { "name": "r", "type": "int", "range": [-3, 3], "exclude": [0] },
+    { "name": "s", "type": "int", "range": [-3, 3], "exclude": [0] }
+  ],
+  "constraints": [
+    "r + s != 0"
+  ],
+  "answer_expr": "r == s ? 0 : 2",
+  "distractors": [
+    {
+      "expr": "r == s ? 2 : 0",
+      "mistake_type": "뾰족한 점의 좌우 기울기를 비교하지 않는다 → 중근/서로 다른 근에서의 뾰족함 판정을 반대로 함"
+    },
+    {
+      "expr": "1",
+      "mistake_type": "generic: 미분 불가능한 점의 개수를 잘못 셈"
+    },
+    {
+      "expr": "3",
+      "mistake_type": "generic: 미분 불가능한 점의 개수를 잘못 셈"
+    },
+    {
+      "expr": "4",
+      "mistake_type": "연속이면 무조건 미분가능하다고 생각한다 → 판정 기준 자체를 혼동"
+    }
+  ],
+  "source_mistakes": [
+    "연속이면 무조건 미분가능하다고 생각한다.",
+    "뾰족한 점의 좌우 기울기를 비교하지 않는다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "|f(x)|는 f가 부호를 바꾸는 단순근에서 뾰족점(연속이지만 미분 불가능)이 생긴다 — |x|의 일반화로 미적분Ⅰ '미분가능성과 연속' 대표 유형이다."
+}

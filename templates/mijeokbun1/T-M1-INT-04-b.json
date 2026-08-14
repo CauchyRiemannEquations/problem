@@ -1,0 +1,45 @@
+{
+  "template_id": "T-M1-INT-04-b",
+  "card_id": "M1-INT-04",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "정적분의 기본 성질 - 선형성(합·상수배)",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "\\displaystyle\\int_{{m}}^{{n}} f(x)\\,dx = {A},\\quad \\int_{{m}}^{{n}} g(x)\\,dx = {B} \\text{ 일 때, } \\displaystyle\\int_{{m}}^{{n}} \\left( 3f(x) - 2g(x) \\right) dx \\text{ 의 값은?}",
+  "params": [
+    { "name": "m", "type": "int", "range": [-1, 1] },
+    { "name": "n", "type": "int", "range": [2, 4] },
+    { "name": "A", "type": "int", "range": [-8, 8], "exclude": [0] },
+    { "name": "B", "type": "int", "range": [-8, 8], "exclude": [0] }
+  ],
+  "constraints": [
+    "A != B",
+    "2*A != B",
+    "2*A != 3*B"
+  ],
+  "answer_expr": "3*A - 2*B",
+  "distractors": [
+    {
+      "expr": "3*A + 2*B",
+      "mistake_type": "상수배를 함수 안에 잘못 적용한다 → 빼기를 더하기로 처리"
+    },
+    {
+      "expr": "A - B",
+      "mistake_type": "상수배를 함수 안에 잘못 적용한다 → 상수배를 무시"
+    },
+    {
+      "expr": "3*B - 2*A",
+      "mistake_type": "generic: 두 정적분 값을 바꿔 적용"
+    },
+    {
+      "expr": "A + B",
+      "mistake_type": "generic: 상수배와 부호를 모두 무시"
+    }
+  ],
+  "source_mistakes": [
+    "상수배를 함수 안에 잘못 적용한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "정적분의 선형성 ∫(af+bg) = a∫f + b∫g 는 미적분Ⅰ '정적분의 성질' 그 자체이다."
+}

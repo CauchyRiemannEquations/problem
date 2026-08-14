@@ -1,0 +1,44 @@
+{
+  "template_id": "T-M1-DIF-06-b",
+  "card_id": "M1-DIF-06",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "접선의 방정식 - 기울기가 주어진 접선의 접점",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{곡선 } y = x^2 + {b}x + {c} \\text{ 의 접선 중 기울기가 } {2*t + b} \\text{ 인 접선의 접점의 } x \\text{좌표는?}",
+  "params": [
+    { "name": "b", "type": "int", "range": [-5, 5], "exclude": [0] },
+    { "name": "c", "type": "int", "range": [-6, 6], "exclude": [0] },
+    { "name": "t", "type": "int", "range": [-4, 4], "exclude": [0] }
+  ],
+  "constraints": [
+    "2*t + b != 0",
+    "t != 2*t + b"
+  ],
+  "answer_expr": "t",
+  "distractors": [
+    {
+      "expr": "2*t + b",
+      "mistake_type": "f'(x)가 아니라 f(x)를 기울기로 쓴다 → 주어진 기울기 값을 그대로 좌표로 답함"
+    },
+    {
+      "expr": "t^2 + b*t + c",
+      "mistake_type": "접점의 y좌표를 구하지 않는다 → x좌표와 y좌표를 혼동"
+    },
+    {
+      "expr": "t + b",
+      "mistake_type": "generic: 방정식 2x+b=m 풀이에서 2로 나누는 과정 실수"
+    },
+    {
+      "expr": "-t",
+      "mistake_type": "generic: 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "f'(x)가 아니라 f(x)를 기울기로 쓴다.",
+    "접점의 y좌표를 구하지 않는다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "f'(x) = (주어진 기울기) 방정식으로 접점을 찾는 것은 미적분Ⅰ '접선의 방정식' 대표 유형이다. 접점 t를 먼저 정하고 기울기를 역산해 표시한다."
+}

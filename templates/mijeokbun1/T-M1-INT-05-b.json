@@ -1,0 +1,45 @@
+{
+  "template_id": "T-M1-INT-05-b",
+  "card_id": "M1-INT-05",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "미분과 적분의 관계 - 정적분으로 정의된 함수의 미분",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "g(x) = \\displaystyle\\int_{{q}}^{x} \\left( {3*a}t^2 + {b} \\right) dt \\text{ 일 때, } g'({p}) \\text{ 의 값은?}",
+  "params": [
+    { "name": "a", "type": "int", "range": [-2, 2], "exclude": [0] },
+    { "name": "b", "type": "int", "range": [-5, 5], "exclude": [0] },
+    { "name": "p", "type": "int", "range": [-3, 3], "exclude": [0] },
+    { "name": "q", "type": "int", "range": [-3, 3] }
+  ],
+  "constraints": [
+    "p != q",
+    "p^2 != q^2"
+  ],
+  "answer_expr": "3*a*p^2 + b",
+  "distractors": [
+    {
+      "expr": "a*p^3 + b*p - (a*q^3 + b*q)",
+      "mistake_type": "미분과 적분의 방향을 혼동한다 → g'({p}) 대신 g({p})를 계산"
+    },
+    {
+      "expr": "6*a*p",
+      "mistake_type": "generic: 한 번 더 미분한 값을 답함"
+    },
+    {
+      "expr": "3*a*q^2 + b",
+      "mistake_type": "원시함수에 아래끝을 먼저 대입한다 → 아래끝 값을 대입"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "부정적분의 C를 정적분 계산에 그대로 남긴다 → 계산이 꼬여 0으로 답함"
+    }
+  ],
+  "source_mistakes": [
+    "미분과 적분의 방향을 혼동한다.",
+    "원시함수에 아래끝을 먼저 대입한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "d/dx ∫_a^x f(t)dt = f(x) 라는 미분과 적분의 관계는 미적분Ⅰ 해당 단원의 핵심 그 자체이다."
+}

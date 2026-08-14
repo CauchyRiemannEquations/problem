@@ -1,0 +1,42 @@
+{
+  "template_id": "T-M1-DIF-04-b",
+  "card_id": "M1-DIF-04",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "도함수의 뜻 - 대칭형 극한식",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "f(x) = x^2 + {b}x \\text{ 일 때, } \\lim_{h \\to 0} \\dfrac{f({p} + h) - f({p} - h)}{h} \\text{ 의 값은?}",
+  "params": [
+    { "name": "b", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "p", "type": "int", "range": [-3, 3], "exclude": [0] }
+  ],
+  "constraints": [
+    "2*p + b != 0"
+  ],
+  "answer_expr": "2*(2*p + b)",
+  "distractors": [
+    {
+      "expr": "2*p + b",
+      "mistake_type": "정의식에서 h를 정리하기 전에 대입한다 → 분자가 2h·f'(p)임을 놓치고 f'(p)만 답함"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "generic: 분자가 0으로 수렴한다고 보고 0으로 답함"
+    },
+    {
+      "expr": "4*p",
+      "mistake_type": "generic: 일차항 b의 기여를 누락"
+    },
+    {
+      "expr": "-2*(2*p + b)",
+      "mistake_type": "generic: 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "정의식에서 h를 정리하기 전에 대입한다.",
+    "f'(a)와 f'(x)를 혼동한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "대칭형 극한식 (f(a+h)-f(a-h))/h = 2f'(a) 변형은 미적분Ⅰ '도함수/미분계수' 대표 유형이다."
+}

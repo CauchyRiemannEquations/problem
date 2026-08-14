@@ -8,7 +8,19 @@
   "problem_format": "mcq5",
   "stem_latex": "\\lim_{x \\to {p}} \\dfrac{x^2 - {p^2}}{x - {p}} \\text{ 의 값은?}",
   "params": [
-    { "name": "p", "type": "int", "range": [-5, 5], "exclude": [0, 1, 2] }
+    {
+      "name": "p",
+      "type": "int",
+      "range": [
+        -8,
+        8
+      ],
+      "exclude": [
+        0,
+        1,
+        2
+      ]
+    }
   ],
   "constraints": [],
   "answer_expr": "2*p",

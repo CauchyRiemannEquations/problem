@@ -1,0 +1,46 @@
+{
+  "template_id": "T-M1-DIF-07-b",
+  "card_id": "M1-DIF-07",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "증가와 감소 - 실수 전체에서 증가할 조건",
+  "difficulty": 3,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{함수 } f(x) = x^3 + ax^2 + {b}x \\text{ 가 실수 전체의 집합에서 증가하도록 하는 정수 } a \\text{ 의 개수는?}",
+  "params": [
+    {
+      "name": "b",
+      "type": "int",
+      "range": [
+        2,
+        8
+      ]
+    }
+  ],
+  "constraints": [],
+  "answer_expr": "2*(b == 2 ? 2 : (b <= 5 ? 3 : 4)) + 1",
+  "distractors": [
+    {
+      "expr": "2*(b == 2 ? 2 : (b <= 5 ? 3 : 4))",
+      "mistake_type": "generic: a=0인 경우를 빠뜨리고 셈"
+    },
+    {
+      "expr": "2*(b == 2 ? 2 : (b <= 5 ? 3 : 4)) - 1",
+      "mistake_type": "경계점 포함 여부를 문제 조건과 맞추지 않는다 → 판별식 D=0(접하는 경우)을 제외"
+    },
+    {
+      "expr": "(b == 2 ? 2 : (b <= 5 ? 3 : 4))",
+      "mistake_type": "generic: 음수 쪽 a를 빠뜨리고 셈"
+    },
+    {
+      "expr": "2*(b == 2 ? 2 : (b <= 5 ? 3 : 4)) + 3",
+      "mistake_type": "generic: 경계 밖 값을 포함해 셈"
+    }
+  ],
+  "source_mistakes": [
+    "f'(x)=0인 점만 찾고 부호표를 만들지 않는다.",
+    "경계점 포함 여부를 문제 조건과 맞추지 않는다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "실수 전체에서 증가 ⇔ f'(x)=3x²+2ax+b ≥ 0 ⇔ 판별식 a² ≤ 3b — 미적분Ⅰ '함수의 증가와 감소'와 선수과목(이차부등식·판별식)의 결합 심화 유형이다. (b∈[2,8]에서 ⌊√(3b)⌋∈{2,3,4}이므로 삼항식으로 동치 표현)"
+}

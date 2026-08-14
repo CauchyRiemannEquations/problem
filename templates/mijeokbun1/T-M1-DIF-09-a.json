@@ -8,8 +8,28 @@
   "problem_format": "mcq5",
   "stem_latex": "\\text{그림은 삼차함수 } y = f(x) \\text{ 의 도함수 } y = f'(x) \\text{ 의 그래프이다. } f(x) \\text{ 가 극대가 되는 } x \\text{ 의 값은?}",
   "params": [
-    { "name": "r", "type": "int", "range": [-3, 1], "exclude": [0] },
-    { "name": "s", "type": "int", "range": [-1, 4], "exclude": [0] }
+    {
+      "name": "r",
+      "type": "int",
+      "range": [
+        -4,
+        2
+      ],
+      "exclude": [
+        0
+      ]
+    },
+    {
+      "name": "s",
+      "type": "int",
+      "range": [
+        -2,
+        5
+      ],
+      "exclude": [
+        0
+      ]
+    }
   ],
   "constraints": [
     "r < s",
@@ -41,14 +61,41 @@
   "needs_figure": true,
   "figure": {
     "window": {
-      "x": ["r - 2", "s + 2"],
-      "y": ["-(s - r)^2/4 - max(1, (s - r)^2/16) - 1", "(s - r)^2/4 + 2"]
+      "x": [
+        "r - 2",
+        "s + 2"
+      ],
+      "y": [
+        "-(s - r)^2/4 - max(1, (s - r)^2/16) - 1",
+        "(s - r)^2/4 + 2"
+      ]
     },
     "elements": [
-      { "kind": "poly", "coeffs": ["r*s", "-(r + s)", "1"] },
-      { "kind": "xtick", "at": "r" },
-      { "kind": "xtick", "at": "s" },
-      { "kind": "label", "at": ["(r + s)/2", "-(s - r)^2/4 - max(1, (s - r)^2/16)"], "text": "y = f'(x)", "anchor": "middle" }
+      {
+        "kind": "poly",
+        "coeffs": [
+          "r*s",
+          "-(r + s)",
+          "1"
+        ]
+      },
+      {
+        "kind": "xtick",
+        "at": "r"
+      },
+      {
+        "kind": "xtick",
+        "at": "s"
+      },
+      {
+        "kind": "label",
+        "at": [
+          "(r + s)/2",
+          "-(s - r)^2/4 - max(1, (s - r)^2/16)"
+        ],
+        "text": "y = f'(x)",
+        "anchor": "middle"
+      }
     ]
   },
   "curriculum_check": "도함수 그래프의 부호(+→-)에서 원함수의 극대를 읽는 것은 미적분Ⅰ '도함수의 활용' 내용이다. 그림은 f'(x)=(x-r)(x-s) 포물선을 파라미터에서 결정론적으로 SVG 렌더링한다."

@@ -1,0 +1,45 @@
+{
+  "template_id": "T-M1-INT-06-b",
+  "card_id": "M1-INT-06",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "정적분으로 정의된 함수 - 극댓값과 극솟값의 차",
+  "difficulty": 3,
+  "problem_format": "mcq5",
+  "stem_latex": "g(x) = \\displaystyle\\int_{{p}}^{x} (t - {r})(t - {s})\\,dt \\text{ 의 극댓값과 극솟값의 차는?}",
+  "params": [
+    { "name": "r", "type": "int", "range": [-3, 2], "exclude": [0] },
+    { "name": "s", "type": "int", "range": [-2, 4], "exclude": [0] },
+    { "name": "p", "type": "int", "range": [-4, 4] }
+  ],
+  "constraints": [
+    "r < s",
+    "p != r",
+    "p != s"
+  ],
+  "answer_expr": "(s - r)^3/6",
+  "distractors": [
+    {
+      "expr": "-(s - r)^3/6",
+      "mistake_type": "아래끝과 위끝이 뒤바뀐 경우 부호를 놓친다 → 극솟값-극댓값으로 계산"
+    },
+    {
+      "expr": "(s - r)^3/3",
+      "mistake_type": "generic: 적분 계산의 계수 실수(2배)"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "적분 변수 t와 위끝 x를 혼동한다 → 극값의 차가 아래끝에 무관함을 이해 못하고 0으로 판단"
+    },
+    {
+      "expr": "(s - r)^3/2",
+      "mistake_type": "generic: 적분 계산의 계수 실수"
+    }
+  ],
+  "source_mistakes": [
+    "적분 변수 t와 위끝 x를 혼동한다.",
+    "아래끝과 위끝이 뒤바뀐 경우 부호를 놓친다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "g'=(x-r)(x-s)이므로 극대(x=r)·극소(x=s)이고 그 차는 -∫_r^s g' dt = (s-r)³/6 — 정적분으로 정의된 함수의 극값 분석, 미적분Ⅰ 심화 유형이다."
+}

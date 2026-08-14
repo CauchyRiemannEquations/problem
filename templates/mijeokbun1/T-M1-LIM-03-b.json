@@ -1,0 +1,48 @@
+{
+  "template_id": "T-M1-LIM-03-b",
+  "card_id": "M1-LIM-03",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "대입으로 구하는 극한 - 유리함수(분모 0 아님)",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "\\lim_{x \\to {p}} \\dfrac{x^3 + {b}x + {c}}{x + {d}} \\text{ 의 값은?}",
+  "params": [
+    { "name": "p", "type": "int", "range": [-3, 3] },
+    { "name": "b", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "c", "type": "int", "range": [-5, 5], "exclude": [0] },
+    { "name": "d", "type": "int", "range": [-4, 4], "exclude": [0] }
+  ],
+  "constraints": [
+    "p + d != 0",
+    "p + d != 1",
+    "p + d != -1",
+    "p != d",
+    "p^3 + b*p + c != 0"
+  ],
+  "answer_expr": "(p^3 + b*p + c)/(p + d)",
+  "distractors": [
+    {
+      "expr": "p^3 + b*p + c",
+      "mistake_type": "generic: 분모를 무시하고 분자에만 대입"
+    },
+    {
+      "expr": "(p^3 + b*p + c)*(p + d)",
+      "mistake_type": "generic: 나눗셈 대신 곱셈으로 계산"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "무조건 인수분해부터 하려고 한다 → 0/0꼴로 착각해 0으로 답함"
+    },
+    {
+      "expr": "(p^3 + b*p + c)/(p - d)",
+      "mistake_type": "generic: 분모 상수의 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "무조건 인수분해부터 하려고 한다.",
+    "대입해도 되는 문제를 복잡하게 푼다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "분모가 0이 되지 않는 유리식의 극한은 연속성에 의한 대입으로 구한다 — 미적분Ⅰ '함수의 극한' 기본 내용."
+}

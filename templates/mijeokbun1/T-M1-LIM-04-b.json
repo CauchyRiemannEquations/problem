@@ -1,0 +1,39 @@
+{
+  "template_id": "T-M1-LIM-04-b",
+  "card_id": "M1-LIM-04",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "0/0꼴 극한 - 세제곱 차 인수분해",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\lim_{x \\to {p}} \\dfrac{x^3 - {p^3}}{x - {p}} \\text{ 의 값은?}",
+  "params": [
+    { "name": "p", "type": "int", "range": [-4, 4], "exclude": [0, 1] }
+  ],
+  "constraints": [],
+  "answer_expr": "3*p^2",
+  "distractors": [
+    {
+      "expr": "0",
+      "mistake_type": "0/0을 0이라고 생각한다"
+    },
+    {
+      "expr": "p^2",
+      "mistake_type": "약분하기 전 인수분해를 제대로 하지 않는다 → x³/x = x²로 부분 약분"
+    },
+    {
+      "expr": "3*p",
+      "mistake_type": "generic: 지수 처리 실수"
+    },
+    {
+      "expr": "-3*p^2",
+      "mistake_type": "generic: 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "0/0을 0이라고 생각한다.",
+    "약분하기 전 인수분해를 제대로 하지 않는다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "세제곱 차 인수분해 a³-b³=(a-b)(a²+ab+b²)는 선수과목 공통수학Ⅰ 범위이며, 이를 이용한 0/0꼴 극한은 미적분Ⅰ '함수의 극한' 유형이다."
+}

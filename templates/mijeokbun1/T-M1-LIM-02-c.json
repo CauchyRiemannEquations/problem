@@ -1,0 +1,38 @@
+{
+  "template_id": "T-M1-LIM-02-c",
+  "card_id": "M1-LIM-02",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "좌극한과 우극한 - 절댓값 분모의 한쪽 극한",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "f(x) = \\dfrac{x^2 - {p^2}}{\\left| x - {p} \\right|} \\text{ 일 때, } \\lim_{x \\to {p}^{+}} f(x) \\text{ 의 값은?}",
+  "params": [
+    { "name": "p", "type": "int", "range": [-5, 5], "exclude": [0] }
+  ],
+  "constraints": [],
+  "answer_expr": "2*p",
+  "distractors": [
+    {
+      "expr": "-2*p",
+      "mistake_type": "한쪽 값만 보고 극한값이 있다고 판단한다 → 절댓값 부호 처리가 뒤집혀 좌극한 값을 답함"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "generic: 0/0꼴을 0으로 답함"
+    },
+    {
+      "expr": "p",
+      "mistake_type": "generic: 부분 약분 후 대입"
+    },
+    {
+      "expr": "4*p",
+      "mistake_type": "generic: 좌·우극한의 차를 답함"
+    }
+  ],
+  "source_mistakes": [
+    "한쪽 값만 보고 극한값이 있다고 판단한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "절댓값이 있는 식의 좌·우극한 계산은 미적분Ⅰ '함수의 극한' 유형이며 합차공식 인수분해는 선수과목 범위이다."
+}

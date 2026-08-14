@@ -1,0 +1,39 @@
+{
+  "template_id": "T-M1-DIF-12-b",
+  "card_id": "M1-DIF-12",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "최대·최소 - 조건이 있는 두 양수의 곱의 최댓값 (활용)",
+  "difficulty": 3,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{두 양수 } x, y \\text{ 가 } x + y = {3*a} \\text{ 를 만족시킬 때, } x^2 y \\text{ 의 최댓값은?}",
+  "params": [
+    { "name": "a", "type": "int", "range": [1, 4] }
+  ],
+  "constraints": [],
+  "answer_expr": "4*a^3",
+  "distractors": [
+    {
+      "expr": "27*a^3/8",
+      "mistake_type": "generic: x=y일 때 최대라고 착각하고 계산"
+    },
+    {
+      "expr": "2*a^3",
+      "mistake_type": "구간 밖의 f'(x)=0인 점을 후보에 넣는다 → 임계점 계산 실수"
+    },
+    {
+      "expr": "3*a^3",
+      "mistake_type": "generic: 최댓값 계산의 계수 실수"
+    },
+    {
+      "expr": "a^3",
+      "mistake_type": "generic: 최댓값 계산의 계수 실수"
+    }
+  ],
+  "source_mistakes": [
+    "양 끝점의 함수값을 계산하지 않는다.",
+    "구간 밖의 f'(x)=0인 점을 후보에 넣는다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "y=3a-x를 대입해 g(x)=x²(3a-x)의 최댓값을 미분으로 구하는(x=2a에서 4a³) 최대·최소 활용 문제 — 미적분Ⅰ '최대·최소에의 활용' 대표 유형이다."
+}

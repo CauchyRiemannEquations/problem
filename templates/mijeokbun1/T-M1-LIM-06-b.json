@@ -1,0 +1,40 @@
+{
+  "template_id": "T-M1-LIM-06-b",
+  "card_id": "M1-LIM-06",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "유리화를 이용한 극한 - 분모의 무리식",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\lim_{x \\to {k^2}} \\dfrac{x - {k^2}}{\\sqrt{x} - {k}} \\text{ 의 값은?}",
+  "params": [
+    { "name": "k", "type": "int", "range": [1, 6] }
+  ],
+  "constraints": [],
+  "answer_expr": "2*k",
+  "distractors": [
+    {
+      "expr": "k",
+      "mistake_type": "루트 안의 식을 전개할 때 실수한다 → √x + √a 대신 √a 하나만 남김"
+    },
+    {
+      "expr": "1/(2*k)",
+      "mistake_type": "유리화 후 부호를 잘못 처리한다 → 분자·분모가 뒤집힌 꼴로 착각"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "켤레식을 분자에만 곱한다 → 계산이 무너져 0으로 답함"
+    },
+    {
+      "expr": "4*k",
+      "mistake_type": "generic: 계수 실수"
+    }
+  ],
+  "source_mistakes": [
+    "켤레식을 분자에만 곱한다.",
+    "유리화 후 부호를 잘못 처리한다.",
+    "루트 안의 식을 전개할 때 실수한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "분모의 무리식을 유리화(합차공식)하는 0/0꼴 극한은 미적분Ⅰ '함수의 극한' 유형이다. x→k² 꼴로 역방향 설계해 답이 항상 정수 2k가 된다."
+}

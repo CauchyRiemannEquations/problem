@@ -1,0 +1,40 @@
+{
+  "template_id": "T-M1-INT-11-b",
+  "card_id": "M1-INT-11",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "정적분과 대칭성 - 대칭구간 정적분이 0이 되는 조건",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "f(x) = x^3 + {a}x^2 + {b}x + c \\text{ 에 대하여 } \\displaystyle\\int_{-2}^{2} f(x)\\,dx = 0 \\text{ 일 때, 상수 } c \\text{ 의 값은?}",
+  "params": [
+    { "name": "a", "type": "choice", "choices": [-6, -3, 3, 6] },
+    { "name": "b", "type": "int", "range": [-4, 4], "exclude": [0] }
+  ],
+  "constraints": [],
+  "answer_expr": "-4*a/3",
+  "distractors": [
+    {
+      "expr": "4*a/3",
+      "mistake_type": "generic: 이항 부호 실수"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "다항식의 홀수차/짝수차 항을 잘못 분류한다 → 모든 항이 소거된다고 착각"
+    },
+    {
+      "expr": "-8*a/3",
+      "mistake_type": "구간이 대칭이 아닌데 대칭성을 적용한다 → 2∫₀² 의 2배 처리 실수"
+    },
+    {
+      "expr": "-a",
+      "mistake_type": "generic: 적분 계수 계산 실수"
+    }
+  ],
+  "source_mistakes": [
+    "다항식의 홀수차/짝수차 항을 잘못 분류한다.",
+    "구간이 대칭이 아닌데 대칭성을 적용한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "홀수차 항은 소거되고 ∫_{-2}^{2}(ax²+c)dx = 16a/3 + 4c = 0 → c = -4a/3 — 대칭성을 조건식으로 활용하는 미적분Ⅰ '정적분의 성질' 유형이다. a를 3의 배수로 제한해 답이 정수다."
+}

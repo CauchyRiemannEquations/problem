@@ -1,0 +1,43 @@
+{
+  "template_id": "T-M1-INT-03-b",
+  "card_id": "M1-INT-03",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "정적분의 뜻 - 이차함수의 정적분 계산",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "\\displaystyle\\int_{0}^{{p}} \\left( 3x^2 + {2*b}x + {c} \\right) dx \\text{ 의 값은?}",
+  "params": [
+    { "name": "p", "type": "int", "range": [1, 4] },
+    { "name": "b", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "c", "type": "int", "range": [-5, 5], "exclude": [0] }
+  ],
+  "constraints": [
+    "p^3 + b*p^2 + c*p != 0"
+  ],
+  "answer_expr": "p^3 + b*p^2 + c*p",
+  "distractors": [
+    {
+      "expr": "3*p^2 + 2*b*p + c",
+      "mistake_type": "generic: 적분하지 않고 피적분함수에 위끝을 대입"
+    },
+    {
+      "expr": "p^3 + b*p^2 + c",
+      "mistake_type": "generic: 상수항의 적분(cx)을 상수 c로 둠"
+    },
+    {
+      "expr": "p^3 + b*p^2",
+      "mistake_type": "아래끝과 위끝을 제대로 보지 않는다 → 상수항 적분을 누락"
+    },
+    {
+      "expr": "(3*p^2 + 2*b*p + c)*p",
+      "mistake_type": "generic: 피적분함수 값에 구간 길이를 곱함"
+    }
+  ],
+  "source_mistakes": [
+    "아래끝과 위끝을 제대로 보지 않는다.",
+    "F(a)-F(b)로 순서를 바꿔 계산한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "이차 다항함수의 정적분 계산(F(b)-F(a))은 미적분Ⅰ '정적분' 기본 내용이다. 계수 3, 2b로 원시함수가 정수 계수가 된다."
+}

@@ -1,0 +1,43 @@
+{
+  "template_id": "T-M1-LIM-09-b",
+  "card_id": "M1-LIM-09",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "연속 조건과 미정계수 - 0/0꼴 극한값 조건",
+  "difficulty": 3,
+  "problem_format": "mcq5",
+  "stem_latex": "\\lim_{x \\to {p}} \\dfrac{x^2 + ax + b}{x - {p}} = {L} \\text{ 일 때, 상수 } a, b \\text{ 에 대하여 } a + b \\text{ 의 값은?}",
+  "params": [
+    { "name": "p", "type": "int", "range": [-3, 3], "exclude": [0] },
+    { "name": "L", "type": "int", "range": [-5, 5], "exclude": [0] }
+  ],
+  "constraints": [
+    "p != L",
+    "L != 2*p"
+  ],
+  "answer_expr": "L - 2*p + p^2 - p*L",
+  "distractors": [
+    {
+      "expr": "L - 2*p",
+      "mistake_type": "등식 하나만 세우고 조건을 빠뜨린다 → a의 값만 구하고 멈춤"
+    },
+    {
+      "expr": "p^2 - p*L",
+      "mistake_type": "등식 하나만 세우고 조건을 빠뜨린다 → b의 값만 구하고 멈춤"
+    },
+    {
+      "expr": "-(L - 2*p + p^2 - p*L)",
+      "mistake_type": "generic: 부호 실수"
+    },
+    {
+      "expr": "L",
+      "mistake_type": "generic: 극한값을 그대로 답함"
+    }
+  ],
+  "source_mistakes": [
+    "등식 하나만 세우고 조건을 빠뜨린다.",
+    "좌극한과 우극한을 반대로 계산한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "극한이 존재하려면 분자가 x=p를 근으로 가져야 한다는 조건(연속 확장)으로 미정계수를 정하는 것은 미적분Ⅰ '함수의 극한과 연속' 대표 심화 유형이다. 분자 근을 p, p-L로 역방향 설계했다."
+}

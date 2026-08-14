@@ -1,0 +1,41 @@
+{
+  "template_id": "T-M1-LIM-01-c",
+  "card_id": "M1-LIM-01",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "함수의 극한의 뜻 - 극한의 기본 성질(곱)",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "\\lim_{x \\to {p}} f(x) = {L} \\text{ 일 때, } \\lim_{x \\to {p}} x f(x) \\text{ 의 값은?}",
+  "params": [
+    { "name": "p", "type": "int", "range": [-4, 4], "exclude": [0, 1] },
+    { "name": "L", "type": "int", "range": [-6, 6], "exclude": [0, 1] }
+  ],
+  "constraints": [
+    "p*L != p + L"
+  ],
+  "answer_expr": "p*L",
+  "distractors": [
+    {
+      "expr": "L",
+      "mistake_type": "generic: 곱해진 x를 무시하고 f의 극한값만 답함"
+    },
+    {
+      "expr": "p + L",
+      "mistake_type": "generic: 곱 대신 합으로 계산"
+    },
+    {
+      "expr": "p",
+      "mistake_type": "x가 a에 가까워진다는 말과 x=a라는 말을 혼동한다 → x값만 답함"
+    },
+    {
+      "expr": "-p*L",
+      "mistake_type": "generic: 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "x가 a에 가까워진다는 말과 x=a라는 말을 혼동한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "수렴하는 두 함수의 곱의 극한(극한의 기본 성질)은 미적분Ⅰ '함수의 극한' 기본 내용이다."
+}

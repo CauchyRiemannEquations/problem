@@ -1,0 +1,55 @@
+{
+  "template_id": "T-M1-DIF-09-b",
+  "card_id": "M1-DIF-09",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "삼차함수 그래프와 도함수 - 도함수 그래프에서 감소 구간 읽기",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{그림은 삼차함수 } y = f(x) \\text{ 의 도함수 } y = f'(x) \\text{ 의 그래프이다. } f(x) \\text{ 가 구간 } (\\alpha, \\beta) \\text{ 에서만 감소할 때, } \\beta - \\alpha \\text{ 의 값은?}",
+  "params": [
+    { "name": "r", "type": "int", "range": [-4, 2], "exclude": [0] },
+    { "name": "s", "type": "int", "range": [-2, 5], "exclude": [0] }
+  ],
+  "constraints": [
+    "r < s",
+    "r + s != 0"
+  ],
+  "answer_expr": "s - r",
+  "distractors": [
+    {
+      "expr": "r + s",
+      "mistake_type": "generic: 두 근의 합을 계산"
+    },
+    {
+      "expr": "s",
+      "mistake_type": "도함수 그래프가 x축 위에 있으면 원래 함수가 증가한다는 연결을 놓친다 → 경계값 자체를 답함"
+    },
+    {
+      "expr": "(s - r)/2",
+      "mistake_type": "generic: 구간 길이의 절반을 계산"
+    },
+    {
+      "expr": "r*s",
+      "mistake_type": "삼차함수 자체의 근과 도함수의 근을 혼동한다 → 근의 곱을 계산"
+    }
+  ],
+  "source_mistakes": [
+    "삼차함수 자체의 근과 도함수의 근을 혼동한다.",
+    "도함수 그래프가 x축 위에 있으면 원래 함수가 증가한다는 연결을 놓친다."
+  ],
+  "needs_figure": true,
+  "figure": {
+    "window": {
+      "x": ["r - 2", "s + 2"],
+      "y": ["-(s - r)^2/4 - max(1, (s - r)^2/16) - 1", "(s - r)^2/4 + 2"]
+    },
+    "elements": [
+      { "kind": "poly", "coeffs": ["r*s", "-(r + s)", "1"] },
+      { "kind": "xtick", "at": "r" },
+      { "kind": "xtick", "at": "s" },
+      { "kind": "label", "at": ["(r + s)/2", "-(s - r)^2/4 - max(1, (s - r)^2/16)"], "text": "y = f'(x)", "anchor": "middle" }
+    ]
+  },
+  "curriculum_check": "f'(x)<0인 구간(도함수 그래프가 x축 아래)에서 f가 감소한다는 해석은 미적분Ⅰ '도함수의 활용' 내용이다. 그림은 f'=(x-r)(x-s) 포물선을 자동 렌더링한다."
+}

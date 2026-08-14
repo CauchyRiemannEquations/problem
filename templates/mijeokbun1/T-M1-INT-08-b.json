@@ -1,0 +1,60 @@
+{
+  "template_id": "T-M1-INT-08-b",
+  "card_id": "M1-INT-08",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "두 곡선 사이의 넓이 - 두 포물선 사이",
+  "difficulty": 3,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{곡선 } y = x^2 \\text{ 과 곡선 } y = -x^2 + {2*(r+s)}x + {-2*r*s} \\text{ 로 둘러싸인 부분의 넓이는?}",
+  "params": [
+    { "name": "r", "type": "int", "range": [-2, 2], "exclude": [0] },
+    { "name": "s", "type": "int", "range": [-1, 3], "exclude": [0] }
+  ],
+  "constraints": [
+    "r < s",
+    "s - r >= 2",
+    "r + s != 0"
+  ],
+  "answer_expr": "(s - r)^3/3",
+  "distractors": [
+    {
+      "expr": "(s - r)^3/6",
+      "mistake_type": "generic: 두 이차항의 차가 2x²임을 놓치고 절반으로 계산"
+    },
+    {
+      "expr": "(s - r)^3/2",
+      "mistake_type": "generic: 적분 계수 실수"
+    },
+    {
+      "expr": "2*(s - r)^3/3",
+      "mistake_type": "아래 함수에서 위 함수를 빼 음수 넓이가 나온다 → 보정 과정에서 2배로 계산"
+    },
+    {
+      "expr": "(s + r)^3/3",
+      "mistake_type": "교점을 구하지 않고 임의의 구간으로 적분한다 → 잘못된 교점 사용"
+    }
+  ],
+  "source_mistakes": [
+    "아래 함수에서 위 함수를 빼 음수 넓이가 나온다.",
+    "교점을 구하지 않고 임의의 구간으로 적분한다."
+  ],
+  "needs_figure": true,
+  "figure": {
+    "window": {
+      "x": ["r - 1.5", "s + 1.5"],
+      "y": ["min(0, r^2, s^2) - 1.5", "max(r^2, s^2, 3*(r + s)^2/4 - 2*r*s) + 1.5"]
+    },
+    "elements": [
+      { "kind": "region", "upper": ["-2*r*s", "2*(r + s)", "-1"], "lower": ["0", "0", "1"], "domain": ["r", "s"] },
+      { "kind": "poly", "coeffs": ["0", "0", "1"] },
+      { "kind": "poly", "coeffs": ["-2*r*s", "2*(r + s)", "-1"] },
+      { "kind": "segment", "from": ["r", "r^2"], "to": ["r", "0"], "dashed": true },
+      { "kind": "segment", "from": ["s", "s^2"], "to": ["s", "0"], "dashed": true },
+      { "kind": "xtick", "at": "r" },
+      { "kind": "xtick", "at": "s" },
+      { "kind": "label", "at": ["max(r - 1.2, -sqrt(max(r^2, s^2) + 1.5) + 0.35)", "min(max(r - 1.2, -sqrt(max(r^2, s^2) + 1.5) + 0.35)^2 + 0.9, max(r^2, s^2) + 1.1)"], "text": "y = x²", "anchor": "middle" }
+    ]
+  },
+  "curriculum_check": "두 곡선의 차 -2(x-r)(x-s)를 교점 사이에서 적분하면 (s-r)³/3 — 두 포물선 사이 넓이는 미적분Ⅰ '두 곡선 사이의 넓이' 심화 유형이다. 계수를 교점 r, s에서 역산해 교점이 항상 정수다."
+}

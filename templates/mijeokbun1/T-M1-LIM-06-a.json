@@ -8,7 +8,14 @@
   "problem_format": "mcq5",
   "stem_latex": "\\lim_{x \\to 0} \\dfrac{\\sqrt{x + {a^2}} - {a}}{x} \\text{ 의 값은?}",
   "params": [
-    { "name": "a", "type": "int", "range": [1, 5] }
+    {
+      "name": "a",
+      "type": "int",
+      "range": [
+        1,
+        9
+      ]
+    }
   ],
   "constraints": [],
   "answer_expr": "1/(2*a)",

@@ -1,0 +1,52 @@
+{
+  "template_id": "T-M1-INT-07-b",
+  "card_id": "M1-INT-07",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "넓이 구하기 - 위로 볼록한 포물선과 x축",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{곡선 } y = {k^2} - x^2 \\text{ 과 } x \\text{축으로 둘러싸인 부분의 넓이는?}",
+  "params": [
+    { "name": "k", "type": "int", "range": [1, 4] }
+  ],
+  "constraints": [],
+  "answer_expr": "4*k^3/3",
+  "distractors": [
+    {
+      "expr": "2*k^3/3",
+      "mistake_type": "generic: 반쪽 구간 [0, k]만 적분"
+    },
+    {
+      "expr": "8*k^3/3",
+      "mistake_type": "generic: 계수 실수(2배)"
+    },
+    {
+      "expr": "4*k^3",
+      "mistake_type": "generic: x³항 적분에서 3으로 나누는 과정을 누락"
+    },
+    {
+      "expr": "2*k^3",
+      "mistake_type": "정적분값이 음수로 나왔는데 넓이로 그대로 쓴다 → 계산이 꼬인 값"
+    }
+  ],
+  "source_mistakes": [
+    "x축과 만나는 점에서 구간을 나누지 않는다.",
+    "넓이를 구하라는 문제와 정적분값을 구하라는 문제를 혼동한다."
+  ],
+  "needs_figure": true,
+  "figure": {
+    "window": {
+      "x": ["-k - 1.6", "k + 1.6"],
+      "y": ["-2", "k^2 + 1.8"]
+    },
+    "elements": [
+      { "kind": "region", "upper": ["k^2", "0", "-1"], "lower": ["0"], "domain": ["-k", "k"] },
+      { "kind": "poly", "coeffs": ["k^2", "0", "-1"] },
+      { "kind": "xtick", "at": "-k" },
+      { "kind": "xtick", "at": "k" },
+      { "kind": "label", "at": ["k + 1.4", "k^2 + 1.1"], "text": "y = {k^2} - x²", "anchor": "end" }
+    ]
+  },
+  "curriculum_check": "x축 위쪽 영역의 넓이 = ∫(위 함수) — 대칭 포물선과 x축 사이 넓이는 미적분Ⅰ '넓이' 기본 유형이다. ∫_{-k}^{k}(k²-x²)dx = 4k³/3. 그림은 빗금 영역과 교점을 자동 렌더링한다."
+}

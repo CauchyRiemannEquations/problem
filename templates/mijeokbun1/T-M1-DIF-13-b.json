@@ -1,0 +1,43 @@
+{
+  "template_id": "T-M1-DIF-13-b",
+  "card_id": "M1-DIF-13",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "속도와 가속도 - 운동 방향을 바꾸는 시각",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{수직선 위를 움직이는 점 } \\mathrm{P} \\text{ 의 시각 } t \\; (t > 0) \\text{ 에서의 위치가 } s(t) = t^3 + {-3*(r+s)/2}t^2 + {3*r*s}t \\text{ 이다. 점 } \\mathrm{P} \\text{ 가 처음으로 운동 방향을 바꾸는 시각은?}",
+  "params": [
+    { "name": "r", "type": "int", "range": [1, 3] },
+    { "name": "s", "type": "int", "range": [2, 6] }
+  ],
+  "constraints": [
+    "r < s",
+    "mod(r + s, 2) == 0"
+  ],
+  "answer_expr": "r",
+  "distractors": [
+    {
+      "expr": "s",
+      "mistake_type": "generic: 두 번째로 방향을 바꾸는 시각을 답함"
+    },
+    {
+      "expr": "(r + s)/2",
+      "mistake_type": "가속도를 구할 때 한 번만 미분한다 → 가속도가 0이 되는 시각과 혼동"
+    },
+    {
+      "expr": "r*s",
+      "mistake_type": "generic: 두 시각의 곱을 계산"
+    },
+    {
+      "expr": "r + s",
+      "mistake_type": "generic: 두 시각의 합을 계산"
+    }
+  ],
+  "source_mistakes": [
+    "속도와 속력을 혼동한다.",
+    "위치 함수에 바로 t를 대입하고 속도를 구했다고 착각한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "운동 방향이 바뀌는 시각 = v(t)=0이고 부호가 바뀌는 시각 — 미적분Ⅰ '속도와 가속도' 대표 유형. v(t)=3(t-r)(t-s)가 되도록 역방향 설계(r+s 짝수로 계수 정수 보장)."
+}

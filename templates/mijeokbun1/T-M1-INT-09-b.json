@@ -1,0 +1,39 @@
+{
+  "template_id": "T-M1-INT-09-b",
+  "card_id": "M1-INT-09",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "속도와 거리 - 출발점으로 되돌아오는 시각",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{원점에서 출발하여 수직선 위를 움직이는 점 } \\mathrm{P} \\text{ 의 시각 } t \\text{ 에서의 속도가 } v(t) = 2t + {b} \\text{ 일 때, 점 } \\mathrm{P} \\text{ 가 다시 원점으로 돌아오는 시각은? } (t > 0)",
+  "params": [
+    { "name": "b", "type": "choice", "choices": [-2, -4, -6, -8] }
+  ],
+  "constraints": [],
+  "answer_expr": "-b",
+  "distractors": [
+    {
+      "expr": "-b/2",
+      "mistake_type": "v(t)=0인 시각을 찾지 않는다 → 방향을 바꾸는 시각을 복귀 시각으로 착각"
+    },
+    {
+      "expr": "-2*b",
+      "mistake_type": "generic: 방정식 풀이의 계수 실수"
+    },
+    {
+      "expr": "b",
+      "mistake_type": "generic: 부호 실수"
+    },
+    {
+      "expr": "-3*b/2",
+      "mistake_type": "generic: 위치 계산 실수"
+    }
+  ],
+  "source_mistakes": [
+    "위치 변화량과 이동 거리를 같은 것으로 생각한다.",
+    "v(t)=0인 시각을 찾지 않는다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "위치 = ∫₀ᵀ v dt = T² + bT = 0 에서 T = -b — 위치 변화량의 의미를 묻는 미적분Ⅰ '속도와 거리' 유형이다."
+}

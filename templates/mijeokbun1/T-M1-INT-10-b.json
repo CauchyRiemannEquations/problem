@@ -1,0 +1,40 @@
+{
+  "template_id": "T-M1-INT-10-b",
+  "card_id": "M1-INT-10",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "적분 조건과 미정계수 - 정적분 등식에서 상수 결정",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "\\displaystyle\\int_{0}^{{a}} (2x + k)\\,dx = {a^2 + k*a} \\text{ 일 때, 상수 } k \\text{ 의 값은?}",
+  "params": [
+    { "name": "a", "type": "int", "range": [2, 5] },
+    { "name": "k", "type": "int", "range": [-5, 5], "exclude": [0] }
+  ],
+  "constraints": [],
+  "answer_expr": "k",
+  "distractors": [
+    {
+      "expr": "k*a",
+      "mistake_type": "정적분 조건을 부정적분처럼 처리한다 → kx 항의 적분값을 k로 착각해 a로 나누지 않음"
+    },
+    {
+      "expr": "a + k",
+      "mistake_type": "generic: 방정식 풀이에서 a² 항 처리 실수"
+    },
+    {
+      "expr": "-k",
+      "mistake_type": "generic: 이항 부호 실수"
+    },
+    {
+      "expr": "k - a",
+      "mistake_type": "generic: 방정식 풀이 실수"
+    }
+  ],
+  "source_mistakes": [
+    "정적분 조건을 부정적분처럼 처리한다.",
+    "적분상수 조건을 빠뜨린다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "정적분 값이 주어진 등식에서 미정계수를 구하는 것은 미적분Ⅰ '정적분' 기본 유형이다. k를 먼저 정하고 우변 값을 역산해 표시한다."
+}

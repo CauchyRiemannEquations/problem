@@ -1,0 +1,39 @@
+{
+  "template_id": "T-M1-DIF-02-b",
+  "card_id": "M1-DIF-02",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "미분계수의 뜻 - x→a 형 정의식",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "f(x) = x^3 \\text{ 일 때, } \\lim_{x \\to {p}} \\dfrac{f(x) - f({p})}{x - {p}} \\text{ 의 값은?}",
+  "params": [
+    { "name": "p", "type": "int", "range": [-4, 4], "exclude": [0, 1, 2, 3] }
+  ],
+  "constraints": [],
+  "answer_expr": "3*p^2",
+  "distractors": [
+    {
+      "expr": "p^3",
+      "mistake_type": "미분계수와 도함수를 구분하지 못한다 → 함수값 f({p})를 답함"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "h를 약분하기 전에 h=0을 대입한다 → 0/0을 0으로 답함"
+    },
+    {
+      "expr": "3*p",
+      "mistake_type": "generic: 지수 처리 실수"
+    },
+    {
+      "expr": "6*p",
+      "mistake_type": "generic: 한 번 더 미분한 값을 답함"
+    }
+  ],
+  "source_mistakes": [
+    "미분계수와 도함수를 구분하지 못한다.",
+    "h를 약분하기 전에 h=0을 대입한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "f'(a) = lim_{x→a} (f(x)-f(a))/(x-a) 형태의 미분계수 정의는 미적분Ⅰ '미분계수' 기본 내용이다."
+}
