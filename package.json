@@ -40,7 +40,10 @@
       "output": "release"
     },
     "win": {
-      "target": "nsis",
+      "target": [
+        "nsis",
+        "portable"
+      ],
       "icon": "electron/icon.png",
       "artifactName": "BamsamFactory-Setup-${version}.exe"
     },
@@ -53,6 +56,9 @@
       "owner": "CauchyRiemannEquations",
       "repo": "problem",
       "releaseType": "release"
+    },
+    "portable": {
+      "artifactName": "BamsamFactory-Portable-${version}.exe"
     }
   }
 }

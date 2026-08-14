@@ -48,6 +48,10 @@ if (!gotLock) {
       shell.openExternal(url);
       return { action: "deny" };
     });
+    // 순간적인 연결 실패 시 자동 재시도
+    mainWin.webContents.on("did-fail-load", () => {
+      setTimeout(() => mainWin && mainWin.loadURL(`http://localhost:${PORT}/`), 600);
+    });
     mainWin.on("closed", () => (mainWin = null));
   }
 
@@ -77,10 +81,33 @@ if (!gotLock) {
     }
   }
 
+  /** 서버가 응답할 때까지 대기 후 창 생성 (느린 디스크/백신 검사 대비) */
+  function waitForServer(tries = 40) {
+    const http = require("http");
+    const req = http.get(`http://localhost:${PORT}/`, (res) => {
+      res.resume();
+      createWindow();
+    });
+    req.on("error", () => {
+      if (tries > 0) setTimeout(() => waitForServer(tries - 1), 250);
+      else {
+        dialog.showErrorBox("밤샘 문제공장", "내부 서버를 시작하지 못했습니다. 다른 프로그램이 8977 포트를 사용 중인지 확인해 주세요.");
+        app.quit();
+      }
+    });
+    req.setTimeout(1000, () => req.destroy());
+  }
+
   app.whenReady().then(() => {
-    // 내장 서버 시작 (같은 프로세스, 즉시 listen)
-    require(path.join(__dirname, "..", "dist", "app.cjs"));
-    setTimeout(createWindow, 350);
+    // 내장 서버 시작 (같은 프로세스)
+    try {
+      require(path.join(__dirname, "..", "dist", "app.cjs"));
+    } catch (e) {
+      dialog.showErrorBox("밤샘 문제공장", `서버 모듈 로딩 실패: ${e.message}`);
+      app.quit();
+      return;
+    }
+    waitForServer();
     setupAutoUpdate();
     app.on("activate", () => {
       if (BrowserWindow.getAllWindows().length === 0) createWindow();
