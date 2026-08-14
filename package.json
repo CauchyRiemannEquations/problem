@@ -1,0 +1,20 @@
+{
+  "name": "bamsam-problem-factory",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "밤샘 문제공장 — 개념카드 기반 파라메트릭 문제 생성 파이프라인 v0.1",
+  "scripts": {
+    "factory:gen": "tsx src/generate.ts",
+    "factory:selftest": "tsx src/selftest.ts",
+    "factory:review": "tsx src/review.ts"
+  },
+  "dependencies": {
+    "mathjs": "^13.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
