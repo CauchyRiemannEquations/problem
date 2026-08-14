@@ -89,13 +89,19 @@ function makeWorksheet(q: URLSearchParams): { html: string } | { error: string }
     [order[i], order[j]] = [order[j], order[i]];
   }
   const problems: GeneratedProblem[] = [];
+  const seen = new Set<string>(); // 같은 문제지 안에서 완전히 동일한 문제(템플릿+파라미터) 재출현 방지
   let cursor = 0;
   let guard = 0;
-  while (problems.length < count && guard < count * 10) {
+  while (problems.length < count && guard < count * 30) {
     guard++;
     const { problem } = generateProblem(order[cursor % order.length], rnd, problems.length + 1);
     cursor++;
-    if (problem) problems.push(problem);
+    if (problem) {
+      const key = problem.template_id + JSON.stringify(problem.params_used);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      problems.push(problem);
+    }
   }
 
   const dLabel = [diffs.includes(1) ? "하" : "", diffs.includes(2) ? "중" : "", diffs.includes(3) ? "상" : ""].filter(Boolean).join("·");
@@ -134,11 +140,27 @@ const server = http.createServer((req, res) => {
   }
 });
 
+/** 주소창 없는 독립 앱 창(브라우저 --app 모드)으로 열기. 실패하면 기본 브라우저로 폴백 */
+function openAppWindow(addr: string) {
+  const fallback = () => {
+    const cmd =
+      process.platform === "win32" ? `start "" ${addr}` : process.platform === "darwin" ? `open ${addr}` : `xdg-open ${addr}`;
+    exec(cmd, () => {});
+  };
+  if (process.platform === "win32") {
+    exec(`start msedge --app=${addr}`, (e) => {
+      if (e) exec(`start chrome --app=${addr}`, (e2) => e2 && fallback());
+    });
+  } else if (process.platform === "darwin") {
+    exec(`open -na "Google Chrome" --args --app=${addr}`, (e) => e && fallback());
+  } else {
+    exec(`google-chrome --app=${addr} || chromium --app=${addr}`, (e) => e && fallback());
+  }
+}
+
 server.listen(PORT, "127.0.0.1", () => {
   const addr = `http://localhost:${PORT}`;
   console.log(`밤샘 문제공장 실행 중 → ${addr}`);
-  console.log(`(창을 닫으려면 이 프로그램을 종료하세요)`);
-  const cmd =
-    process.platform === "win32" ? `start "" ${addr}` : process.platform === "darwin" ? `open ${addr}` : `xdg-open ${addr}`;
-  exec(cmd, () => {});
+  console.log(`이 검은 창은 프로그램 본체입니다. 닫으면 앱이 종료됩니다.`);
+  openAppWindow(addr);
 });

@@ -46,15 +46,20 @@ for (let i = order.length - 1; i > 0; i--) {
 
 const problems: GeneratedProblem[] = [];
 const failures: GenFailure[] = [];
+const seen = new Set<string>(); // 같은 문제지 안에서 동일 문제(템플릿+파라미터) 재출현 방지
 let cursor = 0;
 let guard = 0;
-while (problems.length < count && guard < count * 10) {
+while (problems.length < count && guard < count * 30) {
   guard++;
   const t = order[cursor % order.length];
   cursor++;
   const { problem, failure } = generateProblem(t, rnd, problems.length + 1);
-  if (problem) problems.push(problem);
-  else if (failure) failures.push(failure);
+  if (problem) {
+    const key = problem.template_id + JSON.stringify(problem.params_used);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    problems.push(problem);
+  } else if (failure) failures.push(failure);
 }
 
 const date = new Date().toISOString().slice(0, 10);
