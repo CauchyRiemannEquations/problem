@@ -24,15 +24,22 @@ function fmtNum(v: number): string {
   return String(Math.round(v * 100) / 100);
 }
 
-/** 라벨 텍스트의 {식} 플레이스홀더를 평가값으로 치환 */
+/** 라벨 텍스트의 {식} 플레이스홀더를 평가값으로 치환 + 부호·계수 정규화 ("+ -4" → "- 4", "1t" → "t") */
 function evalText(text: string, scope: Record<string, number>): string {
-  return text.replace(/\{([^{}]+)\}/g, (whole, content: string) => {
+  let s = text.replace(/\{([^{}]+)\}/g, (whole, content: string) => {
     try {
       return fmtNum(ev(content, scope));
     } catch {
       return whole;
     }
   });
+  let prev = "";
+  while (prev !== s) {
+    prev = s;
+    s = s.replace(/\+\s*-\s*/g, "- ").replace(/-\s*-\s*/g, "+ ");
+  }
+  s = s.replace(/(^|[^\d.])1(?=[a-zA-Z])/g, "$1");
+  return s;
 }
 
 export function renderFigure(spec: FigureSpec, rawParams: Record<string, number | string>): string {
@@ -59,23 +66,26 @@ export function renderFigure(spec: FigureSpec, rawParams: Record<string, number 
   );
   P.push(`<rect width="${W}" height="${H}" fill="#ffffff"/>`);
   P.push(
-    `<defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#333"/></marker></defs>`
+    `<defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 9 5 L 0 9 z" fill="#333"/></marker>` +
+      `<pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="6" stroke="#9aa7b8" stroke-width="1.6"/></pattern></defs>`
   );
 
   // 좌표축 (0이 창 안에 있을 때만)
   const hasXAxis = ymin <= 0 && 0 <= ymax;
   const hasYAxis = xmin <= 0 && 0 <= xmax;
+  const axX = spec.axisLabels?.x ?? "x";
+  const axY = spec.axisLabels?.y ?? "y";
   if (hasXAxis) {
     P.push(
       `<line x1="${M - 14}" y1="${sy(0)}" x2="${W - M + 16}" y2="${sy(0)}" stroke="#333" stroke-width="1.2" marker-end="url(#arr)"/>`
     );
-    P.push(`<text stroke="#ffffff" stroke-width="3" paint-order="stroke" x="${W - M + 18}" y="${sy(0) + 5}" fill="#333" font-style="italic">x</text>`);
+    P.push(`<text stroke="#ffffff" stroke-width="3" paint-order="stroke" x="${W - M + 18}" y="${sy(0) + 5}" fill="#333" font-style="italic">${axX}</text>`);
   }
   if (hasYAxis) {
     P.push(
       `<line x1="${sx(0)}" y1="${H - M + 14}" x2="${sx(0)}" y2="${M - 16}" stroke="#333" stroke-width="1.2" marker-end="url(#arr)"/>`
     );
-    P.push(`<text stroke="#ffffff" stroke-width="3" paint-order="stroke" x="${sx(0) - 4}" y="${M - 20}" fill="#333" font-style="italic">y</text>`);
+    P.push(`<text stroke="#ffffff" stroke-width="3" paint-order="stroke" x="${sx(0) - 4}" y="${M - 20}" fill="#333" font-style="italic">${axY}</text>`);
   }
   if (hasXAxis && hasYAxis) {
     P.push(`<text stroke="#ffffff" stroke-width="3" paint-order="stroke" x="${sx(0) - 14}" y="${sy(0) + 16}" fill="#333" font-style="italic">O</text>`);
@@ -84,7 +94,24 @@ export function renderFigure(spec: FigureSpec, rawParams: Record<string, number 
   const dashAttr = ` stroke-dasharray="5 4"`;
 
   for (const el of spec.elements) {
-    if (el.kind === "poly") {
+    if (el.kind === "region") {
+      const up = el.upper.map((c) => ev(c, scope));
+      const lo = el.lower.map((c) => ev(c, scope));
+      const fu = (x: number) => up.reduce((acc, c, i) => acc + c * x ** i, 0);
+      const fl = (x: number) => lo.reduce((acc, c, i) => acc + c * x ** i, 0);
+      const d0 = el.domain[0] === "xmin" ? xmin : ev(el.domain[0], scope);
+      const d1 = el.domain[1] === "xmax" ? xmax : ev(el.domain[1], scope);
+      const N = 120;
+      const fwd: string[] = [];
+      const back: string[] = [];
+      for (let i = 0; i <= N; i++) {
+        const x = d0 + ((d1 - d0) * i) / N;
+        fwd.push(`${sx(x).toFixed(1)},${sy(fu(x)).toFixed(1)}`);
+        back.push(`${sx(x).toFixed(1)},${sy(fl(x)).toFixed(1)}`);
+      }
+      back.reverse();
+      P.push(`<path d="M ${fwd.join(" L ")} L ${back.join(" L ")} Z" fill="url(#hatch)" stroke="none"/>`);
+    } else if (el.kind === "poly") {
       const coeffs = el.coeffs.map((c) => ev(c, scope));
       const f = (x: number) => coeffs.reduce((acc, c, i) => acc + c * x ** i, 0);
       let d0 = xmin;
@@ -135,7 +162,7 @@ export function renderFigure(spec: FigureSpec, rawParams: Record<string, number 
       const label = el.text ? evalText(el.text, scope) : fmtNum(v);
       const x0 = hasYAxis ? sx(0) : M;
       P.push(`<line x1="${x0 - 4}" y1="${sy(v)}" x2="${x0 + 4}" y2="${sy(v)}" stroke="#333" stroke-width="1.2"/>`);
-      P.push(`<text stroke="#ffffff" stroke-width="3" paint-order="stroke" x="${x0 - 7}" y="${sy(v) + 4}" text-anchor="end" fill="#333">${label}</text>`);
+      P.push(`<text stroke="#ffffff" stroke-width="3" paint-order="stroke" x="${x0 - 10}" y="${sy(v) + 4}" text-anchor="end" fill="#333">${label}</text>`);
     } else if (el.kind === "label") {
       const x = ev(el.at[0], scope);
       const y = ev(el.at[1], scope);

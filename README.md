@@ -9,8 +9,9 @@
 
 - 미적분Ⅰ 34장 (`mijeokbun1_ai_rag_cards_v0_1.jsonl`) → 템플릿 36개 (전부 생성 가능)
   - 극한과 연속 10+2 / 미분 13 / 적분 11
-  - 그림이 본질인 유형은 `figure` 스펙으로 SVG를 자동 생성: T-M1-DIF-09-a(도함수 그래프),
-    T-M1-LIM-01-b(뚫린 점 극한 읽기), T-M1-LIM-02-b(좌·우극한 읽기)
+  - 그림이 필요한 유형은 `figure` 스펙으로 SVG를 자동 생성 (6개):
+    T-M1-DIF-09-a(도함수 그래프), T-M1-LIM-01-b(뚫린 점 극한 읽기), T-M1-LIM-02-b(좌·우극한 읽기),
+    T-M1-INT-07-a(곡선-x축 넓이, 빗금 영역), T-M1-INT-08-a(두 곡선 넓이, 빗금 영역), T-M1-INT-09-a(v(t) 그래프)
 - 다른 과목은 `templates/<course>/` 디렉토리만 추가하면 동일 파이프라인으로 확장
 
 ## 구조
@@ -21,7 +22,7 @@ factory/
   src/
     schema.ts             # ProblemTemplate / ParamSpec / DistractorSpec / FigureSpec / GeneratedProblem
     engine.ts             # 샘플링·제약검사·평가(Fraction)·하드검증·LaTeX 렌더링
-    figure.ts             # 파라미터 기반 결정론적 SVG 그림 생성 (좌표축·곡선·뚫린/닫힌 점·점선·눈금)
+    figure.ts             # 파라미터 기반 결정론적 SVG 그림 생성 (좌표축·곡선·빗금 영역·뚫린/닫힌 점·점선·눈금)
     generate.ts           # 생성 CLI
     selftest.ts           # 템플릿당 50회 생성 통과율 + 정답 분포 체크
     review.ts             # 사람 검토용 리포트 생성

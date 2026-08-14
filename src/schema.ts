@@ -85,12 +85,16 @@ export interface DistractorSpec {
 export interface FigureSpec {
   /** 수학 좌표 창: x=[min,max], y=[min,max] (식 문자열) */
   window: { x: [string, string]; y: [string, string] };
+  /** 축 이름 (기본 x, y — 운동 문제는 t, v 등) */
+  axisLabels?: { x?: string; y?: string };
   elements: FigureElement[];
 }
 
 export type FigureElement =
   /** 다항함수 곡선 y = c0 + c1·x + c2·x² + … (coeffs는 낮은 차수부터). domain의 "xmin"/"xmax"는 창 경계 */
   | { kind: "poly"; coeffs: string[]; domain?: [string, string]; dashed?: boolean }
+  /** 두 다항 곡선 사이 영역을 빗금으로 칠함 (넓이 문제용) */
+  | { kind: "region"; upper: string[]; lower: string[]; domain: [string, string] }
   | { kind: "segment"; from: [string, string]; to: [string, string]; dashed?: boolean }
   /** open=true면 뚫린 점(흰 원), 아니면 닫힌 점 */
   | { kind: "point"; at: [string, string]; open?: boolean }

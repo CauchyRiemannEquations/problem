@@ -38,6 +38,25 @@
     "속도가 음수인 구간을 그대로 더해 거리가 줄어든다.",
     "v(t)=0인 시각을 찾지 않는다."
   ],
-  "needs_figure": false,
-  "curriculum_check": "이동 거리 = ∫|v(t)|dt 를 v=0인 시각 기준으로 구간을 나눠 계산하는 것은 미적분Ⅰ '속도와 거리' 대표 유형이다. b를 짝수로 제한해 답이 항상 정수가 된다."
+  "needs_figure": true,
+  "figure": {
+    "window": {
+      "x": ["-1", "p + 1.4"],
+      "y": ["b - 1.5", "2*p + b + 1.8"]
+    },
+    "axisLabels": { "x": "t", "y": "v" },
+    "elements": [
+      { "kind": "poly", "coeffs": ["b", "2"], "domain": ["0", "p"] },
+      { "kind": "segment", "from": ["p", "2*p + b"], "to": ["p", "0"], "dashed": true },
+      { "kind": "segment", "from": ["p", "2*p + b"], "to": ["0", "2*p + b"], "dashed": true },
+      { "kind": "point", "at": ["0", "b"] },
+      { "kind": "point", "at": ["p", "2*p + b"] },
+      { "kind": "xtick", "at": "-b/2" },
+      { "kind": "xtick", "at": "p" },
+      { "kind": "ytick", "at": "b" },
+      { "kind": "ytick", "at": "2*p + b" },
+      { "kind": "label", "at": ["-0.7", "2*p + b + 1.1"], "text": "v(t) = 2t + {b}" }
+    ]
+  },
+  "curriculum_check": "이동 거리 = ∫|v(t)|dt 를 v=0인 시각 기준으로 구간을 나눠 계산하는 것은 미적분Ⅰ '속도와 거리' 대표 유형이다. b를 짝수로 제한해 답이 항상 정수가 된다. 그림은 v(t) 그래프와 v=0이 되는 시각을 함께 제시한다."
 }

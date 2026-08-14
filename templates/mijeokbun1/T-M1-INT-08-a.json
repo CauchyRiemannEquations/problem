@@ -38,6 +38,22 @@
     "아래 함수에서 위 함수를 빼 음수 넓이가 나온다.",
     "교점을 구하지 않고 임의의 구간으로 적분한다."
   ],
-  "needs_figure": false,
-  "curriculum_check": "구간에서 (위 함수 - 아래 함수)의 정적분으로 두 곡선 사이 넓이를 구하는 것은 미적분Ⅰ '두 곡선 사이의 넓이' 유형이다. 직선 계수를 교점 r, s로부터 역산해 교점이 항상 정수가 되도록 설계했다."
+  "needs_figure": true,
+  "figure": {
+    "window": {
+      "x": ["r - 1.5", "s + 1.5"],
+      "y": ["min(0, (r + s)*(r - 1.5) - r*s, (r + s)*(s + 1.5) - r*s) - 1", "max(r^2, s^2) + 1.5"]
+    },
+    "elements": [
+      { "kind": "region", "upper": ["-r*s", "r + s"], "lower": ["0", "0", "1"], "domain": ["r", "s"] },
+      { "kind": "poly", "coeffs": ["0", "0", "1"] },
+      { "kind": "poly", "coeffs": ["-r*s", "r + s"] },
+      { "kind": "segment", "from": ["r", "r^2"], "to": ["r", "0"], "dashed": true },
+      { "kind": "segment", "from": ["s", "s^2"], "to": ["s", "0"], "dashed": true },
+      { "kind": "xtick", "at": "r" },
+      { "kind": "xtick", "at": "s" },
+      { "kind": "label", "at": ["max(r - 1.2, -sqrt(max(r^2, s^2) + 1.5) + 0.35)", "min(max(r - 1.2, -sqrt(max(r^2, s^2) + 1.5) + 0.35)^2 + 0.9, max(r^2, s^2) + 1.1)"], "text": "y = x²", "anchor": "middle" }
+    ]
+  },
+  "curriculum_check": "구간에서 (위 함수 - 아래 함수)의 정적분으로 두 곡선 사이 넓이를 구하는 것은 미적분Ⅰ '두 곡선 사이의 넓이' 유형이다. 직선 계수를 교점 r, s로부터 역산해 교점이 항상 정수가 되도록 설계했다. 그림은 두 곡선 사이 영역을 빗금으로, 교점의 x좌표를 점선·눈금으로 표시한다."
 }
