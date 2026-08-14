@@ -1,0 +1,46 @@
+{
+  "template_id": "T-M1-INT-05-a",
+  "card_id": "M1-INT-05",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "미분과 적분의 관계 - F'의 정적분",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "F(x) = x^3 + {b}x^2 + {c}x \\text{ 일 때, } \\displaystyle\\int_{{m}}^{{n}} F'(x)\\,dx \\text{ 의 값은?}",
+  "params": [
+    { "name": "b", "type": "int", "range": [-3, 3], "exclude": [0] },
+    { "name": "c", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "m", "type": "int", "range": [-2, 2], "exclude": [0] },
+    { "name": "n", "type": "int", "range": [1, 4] }
+  ],
+  "constraints": [
+    "n > m",
+    "n^3 + b*n^2 + c*n - (m^3 + b*m^2 + c*m) != 0",
+    "m^3 + b*m^2 + c*m != 0"
+  ],
+  "answer_expr": "n^3 + b*n^2 + c*n - (m^3 + b*m^2 + c*m)",
+  "distractors": [
+    {
+      "expr": "m^3 + b*m^2 + c*m - (n^3 + b*n^2 + c*n)",
+      "mistake_type": "원시함수에 아래끝을 먼저 대입한다 → F(m)-F(n)으로 계산"
+    },
+    {
+      "expr": "n^3 + b*n^2 + c*n",
+      "mistake_type": "generic: 아래끝 대입을 누락하고 F(위끝)만 계산"
+    },
+    {
+      "expr": "3*n^2 + 2*b*n + c - (3*m^2 + 2*b*m + c)",
+      "mistake_type": "미분과 적분의 방향을 혼동한다 → F'를 적분하는 대신 F'에 끝값을 대입한 차를 계산"
+    },
+    {
+      "expr": "n^3 + b*n^2 + c*n + m^3 + b*m^2 + c*m",
+      "mistake_type": "generic: 두 값의 차 대신 합을 계산"
+    }
+  ],
+  "source_mistakes": [
+    "원시함수에 아래끝을 먼저 대입한다.",
+    "미분과 적분의 방향을 혼동한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "∫_a^b F'(x)dx = F(b)-F(a)라는 미적분의 기본정리는 미적분Ⅰ '미분과 적분의 관계' 그 자체이며, F를 먼저 주는 역방향 설계로 심볼릭 적분을 회피한다."
+}

@@ -1,0 +1,45 @@
+{
+  "template_id": "T-M1-INT-06-a",
+  "card_id": "M1-INT-06",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "정적분으로 정의된 함수 - 극대가 되는 x",
+  "difficulty": 3,
+  "problem_format": "mcq5",
+  "stem_latex": "g(x) = \\displaystyle\\int_{{p}}^{x} (t - {r})(t - {s})\\,dt \\text{ 에 대하여, } g(x) \\text{ 가 극대가 되는 } x \\text{ 의 값은?}",
+  "params": [
+    { "name": "r", "type": "int", "range": [-3, 2], "exclude": [0] },
+    { "name": "s", "type": "int", "range": [-2, 4], "exclude": [0, 1] },
+    { "name": "p", "type": "int", "range": [-4, 4] }
+  ],
+  "constraints": [
+    "r < s",
+    "p != r",
+    "p != s"
+  ],
+  "answer_expr": "r",
+  "distractors": [
+    {
+      "expr": "s",
+      "mistake_type": "아래끝과 위끝이 뒤바뀐 경우 부호를 놓친다 → g'의 부호 판단이 뒤집혀 극소가 되는 x를 답함"
+    },
+    {
+      "expr": "p",
+      "mistake_type": "적분 변수 t와 위끝 x를 혼동한다 → 아래끝 값을 답함"
+    },
+    {
+      "expr": "(r + s)/2",
+      "mistake_type": "generic: g'(x)의 꼭짓점 x좌표와 혼동"
+    },
+    {
+      "expr": "r*s",
+      "mistake_type": "generic: 두 근의 곱을 계산"
+    }
+  ],
+  "source_mistakes": [
+    "적분 변수 t와 위끝 x를 혼동한다.",
+    "아래끝과 위끝이 뒤바뀐 경우 부호를 놓친다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "g(x)=∫_a^x f(t)dt에서 g'(x)=f(x)를 이용해 극값을 찾는 것은 미적분Ⅰ '정적분으로 정의된 함수' 대표 유형이며, g를 직접 적분하지 않아도 되는 역방향 설계다."
+}

@@ -1,0 +1,42 @@
+{
+  "template_id": "T-M1-DIF-03-a",
+  "card_id": "M1-DIF-03",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "미분가능 조건과 미정계수",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "f(x) = \\begin{cases} x^2 + {a}x & (x < {p}) \\\\ bx + c & (x \\ge {p}) \\end{cases} \\text{ 가 } x = {p} \\text{ 에서 미분가능할 때, } b + c \\text{ 의 값은?}",
+  "params": [
+    { "name": "a", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "p", "type": "int", "range": [-3, 3], "exclude": [0, 1] }
+  ],
+  "constraints": [
+    "2*p + a - p^2 != 0"
+  ],
+  "answer_expr": "2*p + a - p^2",
+  "distractors": [
+    {
+      "expr": "a + p^2",
+      "mistake_type": "뾰족한 점의 좌우 기울기를 비교하지 않는다 → 기울기 조건 없이 b=a로 두고 연속 조건만 사용"
+    },
+    {
+      "expr": "p^2 + a*p",
+      "mistake_type": "연속이면 무조건 미분가능하다고 생각한다 → 연속 조건의 값 f({p})를 그대로 답함"
+    },
+    {
+      "expr": "2*p + a",
+      "mistake_type": "generic: c를 0으로 두고 b만 계산"
+    },
+    {
+      "expr": "2*p + a + p^2",
+      "mistake_type": "generic: c의 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "연속이면 무조건 미분가능하다고 생각한다.",
+    "뾰족한 점의 좌우 기울기를 비교하지 않는다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "미분가능하면 연속(함수값 일치)이고 좌우 미분계수도 일치해야 한다는 조건으로 미정계수를 구하는 것은 미적분Ⅰ '미분가능성과 연속' 대표 유형이다."
+}

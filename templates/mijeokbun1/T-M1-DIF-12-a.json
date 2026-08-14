@@ -1,0 +1,42 @@
+{
+  "template_id": "T-M1-DIF-12-a",
+  "card_id": "M1-DIF-12",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "닫힌구간에서의 최댓값",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{닫힌구간 } [0, {2*c}] \\text{ 에서 함수 } f(x) = x^3 - {3*c^2}x + {d} \\text{ 의 최댓값은?}",
+  "params": [
+    { "name": "c", "type": "int", "range": [1, 3] },
+    { "name": "d", "type": "int", "range": [-5, 5], "exclude": [0] }
+  ],
+  "constraints": [
+    "2*c^3 + d != 2*c"
+  ],
+  "answer_expr": "2*c^3 + d",
+  "distractors": [
+    {
+      "expr": "-2*c^3 + d",
+      "mistake_type": "양 끝점의 함수값을 계산하지 않는다 → 내부 임계점 x={c}의 값만 검토해 답함"
+    },
+    {
+      "expr": "2*c",
+      "mistake_type": "최댓값과 최댓값을 갖는 x를 혼동한다 → 최대가 되는 x값(오른쪽 끝점)을 답함"
+    },
+    {
+      "expr": "d",
+      "mistake_type": "generic: f(0)만 확인하고 답함"
+    },
+    {
+      "expr": "2*c^3 - d",
+      "mistake_type": "generic: 상수항 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "양 끝점의 함수값을 계산하지 않는다.",
+    "최댓값과 최댓값을 갖는 x를 혼동한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "닫힌구간에서 최대·최소 후보(양 끝점과 f'=0인 내부 점)를 비교하는 것은 미적분Ⅰ '최대·최소에의 활용' 대표 유형이다."
+}

@@ -1,0 +1,47 @@
+{
+  "template_id": "T-M1-DIF-01-a",
+  "card_id": "M1-DIF-01",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "평균변화율 계산",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "f(x) = x^2 + {b}x \\text{ 에 대하여, 구간 } [{p}, {q}] \\text{ 에서의 평균변화율은?}",
+  "params": [
+    { "name": "b", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "p", "type": "int", "range": [-3, 2] },
+    { "name": "q", "type": "int", "range": [-1, 4] }
+  ],
+  "constraints": [
+    "q > p",
+    "q - p != 1",
+    "p + q + b != 0",
+    "p + q + b != 1",
+    "p + q + b != -1"
+  ],
+  "answer_expr": "p + q + b",
+  "distractors": [
+    {
+      "expr": "2*p + b",
+      "mistake_type": "평균변화율과 순간변화율을 혼동한다 → f'({p})를 답함"
+    },
+    {
+      "expr": "2*q + b",
+      "mistake_type": "평균변화율과 순간변화율을 혼동한다 → f'({q})를 답함"
+    },
+    {
+      "expr": "(q - p) / (q^2 + b*q - (p^2 + b*p))",
+      "mistake_type": "분자와 분모의 순서를 다르게 쓴다 → (b-a)/(f(b)-f(a))로 역수를 계산"
+    },
+    {
+      "expr": "q^2 + b*q - (p^2 + b*p)",
+      "mistake_type": "generic: 분모 (b-a)로 나누지 않고 f(b)-f(a)만 계산"
+    }
+  ],
+  "source_mistakes": [
+    "분자와 분모의 순서를 다르게 쓴다.",
+    "평균변화율과 순간변화율을 혼동한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "구간 [a,b]에서의 평균변화율 (f(b)-f(a))/(b-a)는 미적분Ⅰ '미분계수' 도입 내용이며 이차함수만 사용한다."
+}

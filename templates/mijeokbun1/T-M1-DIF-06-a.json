@@ -1,0 +1,47 @@
+{
+  "template_id": "T-M1-DIF-06-a",
+  "card_id": "M1-DIF-06",
+  "course": "미적분Ⅰ",
+  "unit": "다항함수의 미분법",
+  "title": "접선의 방정식 - 접점에서의 접선의 y절편",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{곡선 } y = x^2 + {b}x + {c} \\text{ 위의 } x = {t} \\text{ 인 점에서의 접선의 } y\\text{절편은?}",
+  "params": [
+    { "name": "b", "type": "int", "range": [-5, 5], "exclude": [0] },
+    { "name": "c", "type": "int", "range": [-6, 6], "exclude": [0] },
+    { "name": "t", "type": "int", "range": [-3, 3], "exclude": [0, 1] }
+  ],
+  "constraints": [
+    "c - t^2 != (t^2 + b*t + c) * (1 - t)",
+    "c - t^2 != -(2*t + b) * t",
+    "c - t^2 != c + t^2",
+    "c - t^2 != b*t + c - t^2",
+    "abs(c - t^2) <= 30"
+  ],
+  "answer_expr": "c - t^2",
+  "distractors": [
+    {
+      "expr": "(t^2 + b*t + c) * (1 - t)",
+      "mistake_type": "f'(x)가 아니라 f(x)를 기울기로 쓴다 → 기울기를 f(t)로 잡고 y절편 f(t)-f(t)·t를 계산"
+    },
+    {
+      "expr": "-(2*t + b) * t",
+      "mistake_type": "접점의 y좌표를 구하지 않는다 → y - 0 = f'(t)(x - t)로 세워 y절편 -f'(t)·t를 얻음"
+    },
+    {
+      "expr": "b*t + c - t^2",
+      "mistake_type": "generic: 도함수에서 b를 빠뜨려 기울기를 2t로 계산 (계수 실수)"
+    },
+    {
+      "expr": "c + t^2",
+      "mistake_type": "generic: y절편 c - t²의 부호를 반대로 계산 (부호 실수)"
+    }
+  ],
+  "source_mistakes": [
+    "접점의 y좌표를 구하지 않는다.",
+    "f'(x)가 아니라 f(x)를 기울기로 쓴다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "이차함수(다항함수)의 도함수와 접선의 방정식 y-f(a)=f'(a)(x-a)는 미적분Ⅰ '다항함수의 미분법' 범위이며, 초월함수를 사용하지 않는다."
+}

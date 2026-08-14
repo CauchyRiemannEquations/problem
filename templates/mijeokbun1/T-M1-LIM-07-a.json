@@ -1,0 +1,45 @@
+{
+  "template_id": "T-M1-LIM-07-a",
+  "card_id": "M1-LIM-07",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "극한값이 존재하지 않는 경우 - 절댓값 함수의 한쪽 극한",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "f(x) = \\dfrac{{a}\\left| x - {p} \\right|}{x - {p}} + {b} \\text{ 일 때, } \\lim_{x \\to {p}^{-}} f(x) \\text{ 의 값은?}",
+  "params": [
+    { "name": "a", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "p", "type": "int", "range": [-3, 3] },
+    { "name": "b", "type": "int", "range": [-5, 5] }
+  ],
+  "constraints": [
+    "a != b",
+    "b != 3*a",
+    "b - a != 0"
+  ],
+  "answer_expr": "b - a",
+  "distractors": [
+    {
+      "expr": "b + a",
+      "mistake_type": "한쪽 극한만 보고 판단한다 → 우극한 값을 좌극한으로 착각"
+    },
+    {
+      "expr": "b",
+      "mistake_type": "함수값이 있으면 극한값도 있다고 생각한다 → 절댓값 항을 0으로 취급하고 b만 답함"
+    },
+    {
+      "expr": "a - b",
+      "mistake_type": "generic: 부호 실수"
+    },
+    {
+      "expr": "2*a",
+      "mistake_type": "generic: 우극한과 좌극한의 차를 답함"
+    }
+  ],
+  "source_mistakes": [
+    "함수값이 있으면 극한값도 있다고 생각한다.",
+    "한쪽 극한만 보고 판단한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "|x-a|/(x-a) 꼴에서 좌·우극한이 달라 극한이 존재하지 않는 상황은 미적분Ⅰ '함수의 극한' 범위이며, 절댓값은 선수과목 개념이다."
+}

@@ -1,0 +1,44 @@
+{
+  "template_id": "T-M1-LIM-03-a",
+  "card_id": "M1-LIM-03",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "대입으로 구하는 극한 - 다항함수",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "\\lim_{x \\to {p}} \\left( x^2 + {b}x + {c} \\right) \\text{ 의 값은?}",
+  "params": [
+    { "name": "p", "type": "int", "range": [-3, 3], "exclude": [0] },
+    { "name": "b", "type": "int", "range": [-5, 5], "exclude": [0] },
+    { "name": "c", "type": "int", "range": [-6, 6], "exclude": [0] }
+  ],
+  "constraints": [
+    "p + b != 0",
+    "p^2 + b*p + c != 0"
+  ],
+  "answer_expr": "p^2 + b*p + c",
+  "distractors": [
+    {
+      "expr": "c",
+      "mistake_type": "generic: x→0으로 잘못 보고 상수항만 답함"
+    },
+    {
+      "expr": "p^2 + b*p",
+      "mistake_type": "generic: 상수항 누락"
+    },
+    {
+      "expr": "-(p^2 + b*p + c)",
+      "mistake_type": "무조건 인수분해부터 하려고 한다 / 대입해도 되는 문제를 복잡하게 푼다 → 불필요한 식 변형 과정에서 부호가 뒤집힘"
+    },
+    {
+      "expr": "p^2 - b*p + c",
+      "mistake_type": "generic: 일차항 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "무조건 인수분해부터 하려고 한다.",
+    "대입해도 되는 문제를 복잡하게 푼다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "다항함수의 연속성을 이용해 극한을 대입으로 구하는 것은 미적분Ⅰ '함수의 극한' 기본 내용이며 이차식만 사용한다."
+}

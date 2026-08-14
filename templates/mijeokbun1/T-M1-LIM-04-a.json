@@ -1,0 +1,40 @@
+{
+  "template_id": "T-M1-LIM-04-a",
+  "card_id": "M1-LIM-04",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "0/0꼴 극한 - 합차공식 약분",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "\\lim_{x \\to {p}} \\dfrac{x^2 - {p^2}}{x - {p}} \\text{ 의 값은?}",
+  "params": [
+    { "name": "p", "type": "int", "range": [-5, 5], "exclude": [0, 1, 2] }
+  ],
+  "constraints": [],
+  "answer_expr": "2*p",
+  "distractors": [
+    {
+      "expr": "0",
+      "mistake_type": "0/0을 0이라고 생각한다 → 분자에 그대로 대입해 0이라고 답함"
+    },
+    {
+      "expr": "p",
+      "mistake_type": "약분하기 전 인수분해를 제대로 하지 않는다 → x²/x만 부분 약분하고 x→p를 대입"
+    },
+    {
+      "expr": "p^2",
+      "mistake_type": "극한에서의 약분과 함수값 계산을 혼동한다 → 분자의 x²에만 대입한 값을 답함"
+    },
+    {
+      "expr": "-2*p",
+      "mistake_type": "generic: 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "0/0을 0이라고 생각한다.",
+    "약분하기 전 인수분해를 제대로 하지 않는다.",
+    "극한에서의 약분과 함수값 계산을 혼동한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "0/0꼴 극한의 합차공식 인수분해는 미적분Ⅰ '함수의 극한' 핵심 유형이며, 합차공식은 선수과목 공통수학Ⅰ 개념이다."
+}

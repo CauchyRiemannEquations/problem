@@ -1,0 +1,44 @@
+{
+  "template_id": "T-M1-DIF-07-a",
+  "card_id": "M1-DIF-07",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "증가와 감소 - 감소 구간의 길이",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{함수 } f(x) = x^3 + {-3*(r+s)/2}x^2 + {3*r*s}x \\text{ 가 구간 } (\\alpha, \\beta) \\text{ 에서만 감소할 때, } \\beta - \\alpha \\text{ 의 값은?}",
+  "params": [
+    { "name": "r", "type": "int", "range": [-4, 2], "exclude": [0] },
+    { "name": "s", "type": "int", "range": [-2, 4], "exclude": [0] }
+  ],
+  "constraints": [
+    "r < s",
+    "mod(r + s, 2) == 0",
+    "r + s != 0"
+  ],
+  "answer_expr": "s - r",
+  "distractors": [
+    {
+      "expr": "r + s",
+      "mistake_type": "generic: 두 경계값의 합을 계산"
+    },
+    {
+      "expr": "s",
+      "mistake_type": "f'(x)=0인 점만 찾고 부호표를 만들지 않는다 → 경계값 β 자체를 답함"
+    },
+    {
+      "expr": "r*s",
+      "mistake_type": "generic: f'(x)=0의 두 근의 곱을 계산"
+    },
+    {
+      "expr": "-(r + s)",
+      "mistake_type": "generic: 경계값 합의 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "f'(x)=0인 점만 찾고 부호표를 만들지 않는다.",
+    "f(x)의 부호로 증가/감소를 판단한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "f'(x)<0인 구간에서 감소한다는 판정은 미적분Ⅰ '함수의 증가와 감소' 내용이며, f'는 이차함수로 인수분해는 선수과목 범위이다. (r+s는 짝수로 제한해 계수가 정수가 되도록 역방향 설계)"
+}

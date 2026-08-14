@@ -1,0 +1,44 @@
+{
+  "template_id": "T-M1-DIF-05-a",
+  "card_id": "M1-DIF-05",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "다항함수의 미분법 - 삼차함수의 미분계수",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "f(x) = {a}x^3 + {b}x^2 + {c}x + {d} \\text{ 일 때, } f'({p}) \\text{ 의 값은?}",
+  "params": [
+    { "name": "a", "type": "int", "range": [-3, 3], "exclude": [0] },
+    { "name": "b", "type": "int", "range": [-3, 3], "exclude": [0] },
+    { "name": "c", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "d", "type": "int", "range": [-5, 5], "exclude": [0] },
+    { "name": "p", "type": "int", "range": [-3, 3], "exclude": [0, 1] }
+  ],
+  "constraints": [],
+  "answer_expr": "3*a*p^2 + 2*b*p + c",
+  "distractors": [
+    {
+      "expr": "3*a*p^2 + 2*b*p + c + d",
+      "mistake_type": "상수항을 그대로 남긴다"
+    },
+    {
+      "expr": "a*p^2 + b*p + c",
+      "mistake_type": "계수를 빠뜨린다 → 지수 n을 계수에 곱하지 않음"
+    },
+    {
+      "expr": "3*a*p^3 + 2*b*p^2 + c*p",
+      "mistake_type": "지수를 1 줄이지 않는다"
+    },
+    {
+      "expr": "a*p^3 + b*p^2 + c*p + d",
+      "mistake_type": "generic: 미분하지 않고 f({p})를 계산"
+    }
+  ],
+  "source_mistakes": [
+    "상수항을 그대로 남긴다.",
+    "계수를 빠뜨린다.",
+    "지수를 1 줄이지 않는다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "(x^n)'=nx^{n-1}과 미분의 선형성은 미적분Ⅰ '다항함수의 미분법' 그 자체이며 삼차 이하 다항식만 사용한다."
+}

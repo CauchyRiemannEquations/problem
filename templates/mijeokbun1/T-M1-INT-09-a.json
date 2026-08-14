@@ -1,0 +1,43 @@
+{
+  "template_id": "T-M1-INT-09-a",
+  "card_id": "M1-INT-09",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "속도와 거리 - 방향이 바뀌는 운동의 이동 거리",
+  "difficulty": 3,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{수직선 위를 움직이는 점 } \\mathrm{P} \\text{ 의 시각 } t \\text{ 에서의 속도가 } v(t) = 2t + {b} \\text{ 일 때, } t = 0 \\text{ 에서 } t = {p} \\text{ 까지 점 } \\mathrm{P} \\text{ 가 움직인 거리는?}",
+  "params": [
+    { "name": "b", "type": "choice", "choices": [-2, -4, -6] },
+    { "name": "p", "type": "int", "range": [2, 6] }
+  ],
+  "constraints": [
+    "p > -b/2"
+  ],
+  "answer_expr": "p^2 + b*p + b^2/2",
+  "distractors": [
+    {
+      "expr": "p^2 + b*p",
+      "mistake_type": "위치 변화량과 이동 거리를 같은 것으로 생각한다 / 속도가 음수인 구간을 그대로 더해 거리가 줄어든다"
+    },
+    {
+      "expr": "p^2 + b*p - b^2/2",
+      "mistake_type": "v(t)=0인 시각을 찾지 않는다 → 방향이 바뀌는 구간 보정의 부호 실수"
+    },
+    {
+      "expr": "2*p + b",
+      "mistake_type": "generic: t={p}에서의 속도를 답함"
+    },
+    {
+      "expr": "p^2 - b*p + b^2/2",
+      "mistake_type": "generic: 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "위치 변화량과 이동 거리를 같은 것으로 생각한다.",
+    "속도가 음수인 구간을 그대로 더해 거리가 줄어든다.",
+    "v(t)=0인 시각을 찾지 않는다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "이동 거리 = ∫|v(t)|dt 를 v=0인 시각 기준으로 구간을 나눠 계산하는 것은 미적분Ⅰ '속도와 거리' 대표 유형이다. b를 짝수로 제한해 답이 항상 정수가 된다."
+}

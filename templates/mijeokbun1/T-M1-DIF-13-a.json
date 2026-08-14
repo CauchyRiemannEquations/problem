@@ -1,0 +1,41 @@
+{
+  "template_id": "T-M1-DIF-13-a",
+  "card_id": "M1-DIF-13",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "속도와 가속도 - 위치 함수의 두 번 미분",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{수직선 위를 움직이는 점 } \\mathrm{P} \\text{ 의 시각 } t \\text{ 에서의 위치가 } s(t) = t^3 + {b}t^2 + {c}t \\text{ 일 때, } t = {p} \\text{ 에서의 점 } \\mathrm{P} \\text{ 의 가속도는?}",
+  "params": [
+    { "name": "b", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "c", "type": "int", "range": [-5, 5], "exclude": [0] },
+    { "name": "p", "type": "int", "range": [1, 4] }
+  ],
+  "constraints": [],
+  "answer_expr": "6*p + 2*b",
+  "distractors": [
+    {
+      "expr": "3*p^2 + 2*b*p + c",
+      "mistake_type": "가속도를 구할 때 한 번만 미분한다 → 속도 v({p})를 답함"
+    },
+    {
+      "expr": "p^3 + b*p^2 + c*p",
+      "mistake_type": "위치 함수에 바로 t를 대입하고 속도를 구했다고 착각한다 → 위치 s({p})를 답함"
+    },
+    {
+      "expr": "6*p",
+      "mistake_type": "generic: 이차항의 미분(2b)을 누락"
+    },
+    {
+      "expr": "6*p - 2*b",
+      "mistake_type": "generic: 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "가속도를 구할 때 한 번만 미분한다.",
+    "위치 함수에 바로 t를 대입하고 속도를 구했다고 착각한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "위치→속도→가속도로 미분을 두 번 적용하는 직선 운동은 미적분Ⅰ '속도와 가속도' 기본 유형이며 다항함수만 사용한다."
+}

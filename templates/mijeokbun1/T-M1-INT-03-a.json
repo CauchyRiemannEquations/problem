@@ -1,0 +1,46 @@
+{
+  "template_id": "T-M1-INT-03-a",
+  "card_id": "M1-INT-03",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "정적분의 뜻 - 일차함수의 정적분 계산",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "\\displaystyle\\int_{{m}}^{{n}} (2x + {b})\\,dx \\text{ 의 값은?}",
+  "params": [
+    { "name": "m", "type": "int", "range": [-2, 2], "exclude": [0] },
+    { "name": "n", "type": "int", "range": [1, 4] },
+    { "name": "b", "type": "int", "range": [-8, -2] }
+  ],
+  "constraints": [
+    "n > m",
+    "m + b != 0",
+    "n^2 + b*n - (m^2 + b*m) < 0"
+  ],
+  "answer_expr": "n^2 + b*n - (m^2 + b*m)",
+  "distractors": [
+    {
+      "expr": "abs(n^2 + b*n - (m^2 + b*m))",
+      "mistake_type": "정적분값과 넓이를 항상 같다고 생각한다 / F(a)-F(b)로 순서를 바꿔 계산한다 → 부호가 반대인 값을 답함"
+    },
+    {
+      "expr": "n^2 + b*n",
+      "mistake_type": "아래끝과 위끝을 제대로 보지 않는다 → F(아래끝) 대입을 누락"
+    },
+    {
+      "expr": "m^2 + b*m",
+      "mistake_type": "generic: F(아래끝)만 계산"
+    },
+    {
+      "expr": "n^2 - m^2",
+      "mistake_type": "generic: 일차항({b}x)의 적분을 누락"
+    }
+  ],
+  "source_mistakes": [
+    "F(a)-F(b)로 순서를 바꿔 계산한다.",
+    "정적분값과 넓이를 항상 같다고 생각한다.",
+    "아래끝과 위끝을 제대로 보지 않는다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "∫_a^b f dx = F(b)-F(a) 계산은 미적분Ⅰ '정적분' 기본 내용이다. 피적분함수가 2x+b이므로 원시함수 x²+bx가 정수 계수로 떨어진다. 정적분값이 음수가 되도록 제약해 '넓이와 혼동' 오답이 의미를 갖는다."
+}

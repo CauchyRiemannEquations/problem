@@ -1,0 +1,40 @@
+{
+  "template_id": "T-M1-DIF-04-a",
+  "card_id": "M1-DIF-04",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "도함수의 뜻 - 정의로 구한 도함수의 값",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{도함수의 정의를 이용하여 } f(x) = x^3 + {b}x \\text{ 의 도함수 } f'(x) \\text{ 를 구했을 때, } f'({p}) \\text{ 의 값은?}",
+  "params": [
+    { "name": "b", "type": "int", "range": [-5, 5], "exclude": [0] },
+    { "name": "p", "type": "int", "range": [-3, 3], "exclude": [0] }
+  ],
+  "constraints": [],
+  "answer_expr": "3*p^2 + b",
+  "distractors": [
+    {
+      "expr": "p^3 + b*p",
+      "mistake_type": "f'(a)와 f'(x)를 혼동한다 → 도함수 대신 함수값 f({p})를 계산"
+    },
+    {
+      "expr": "3*p^2",
+      "mistake_type": "generic: 일차항의 미분(상수 b)을 누락"
+    },
+    {
+      "expr": "6*p",
+      "mistake_type": "generic: 한 번 더 미분한 값을 답함"
+    },
+    {
+      "expr": "3*p^2 - b",
+      "mistake_type": "generic: 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "f'(a)와 f'(x)를 혼동한다.",
+    "도함수를 특정한 숫자 하나로 생각한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "도함수의 정의 f'(x)=lim (f(x+h)-f(x))/h 와 다항함수 도함수 계산은 미적분Ⅰ '도함수' 기본 내용이다."
+}

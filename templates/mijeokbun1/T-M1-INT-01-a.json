@@ -1,0 +1,41 @@
+{
+  "template_id": "T-M1-INT-01-a",
+  "card_id": "M1-INT-01",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "부정적분의 뜻 - F'(x)=f(x) 관계",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "F(x) = x^3 + {b}x^2 + {c}x + {d} \\text{ 가 함수 } f(x) \\text{ 의 한 부정적분일 때, } f({p}) \\text{ 의 값은?}",
+  "params": [
+    { "name": "b", "type": "int", "range": [-3, 3], "exclude": [0] },
+    { "name": "c", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "d", "type": "int", "range": [-5, 5], "exclude": [0] },
+    { "name": "p", "type": "int", "range": [1, 3] }
+  ],
+  "constraints": [],
+  "answer_expr": "3*p^2 + 2*b*p + c",
+  "distractors": [
+    {
+      "expr": "p^3 + b*p^2 + c*p + d",
+      "mistake_type": "generic: F'=f 관계를 잊고 F({p})를 그대로 답함"
+    },
+    {
+      "expr": "p^3 + b*p^2 + c*p",
+      "mistake_type": "부정적분에서 적분상수 C를 빠뜨린다 → 상수항만 뺀 F({p})를 답함"
+    },
+    {
+      "expr": "3*p^2 + 2*b*p",
+      "mistake_type": "generic: 일차항의 미분(상수 c) 누락"
+    },
+    {
+      "expr": "6*p + 2*b",
+      "mistake_type": "generic: 한 번 더 미분한 값을 답함"
+    }
+  ],
+  "source_mistakes": [
+    "부정적분에서 적분상수 C를 빠뜨린다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "F'(x)=f(x)라는 부정적분(원시함수)의 정의는 미적분Ⅰ '부정적분' 도입 내용이며, F를 먼저 주고 f를 미분으로 얻는 역방향 설계로 심볼릭 적분 없이 정답을 계산한다."
+}

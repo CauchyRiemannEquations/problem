@@ -1,0 +1,46 @@
+{
+  "template_id": "T-M1-INT-10-a",
+  "card_id": "M1-INT-10",
+  "course": "미적분Ⅰ",
+  "unit": "적분",
+  "title": "적분 조건과 미정계수 - 일차함수 결정",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{일차함수 } f(x) \\text{ 가 } \\displaystyle\\int_{0}^{1} f(x)\\,dx = {a/2 + b},\\qquad \\int_{0}^{2} f(x)\\,dx = {2*a + 2*b} \\text{ 를 만족시킬 때, } f({p}) \\text{ 의 값은?}",
+  "params": [
+    { "name": "a", "type": "choice", "choices": [-4, -2, 2, 4] },
+    { "name": "b", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "p", "type": "int", "range": [3, 5] }
+  ],
+  "constraints": [
+    "a != b",
+    "a/2 + b != 0",
+    "a + b != 0",
+    "a*p + b != 0"
+  ],
+  "answer_expr": "a*p + b",
+  "distractors": [
+    {
+      "expr": "p*(a/2 + b)",
+      "mistake_type": "정적분 조건을 부정적분처럼 처리한다 → ∫₀¹f 값을 f(1)로 착각하고 비례 계산"
+    },
+    {
+      "expr": "2*a*p + 2*b",
+      "mistake_type": "미정계수 하나를 구한 뒤 다른 조건을 확인하지 않는다 → 한 조건만으로 f를 2배 크게 결정"
+    },
+    {
+      "expr": "b*p + a",
+      "mistake_type": "generic: 기울기와 y절편을 바꿔 씀"
+    },
+    {
+      "expr": "a*p - b",
+      "mistake_type": "generic: 부호 실수"
+    }
+  ],
+  "source_mistakes": [
+    "정적분 조건을 부정적분처럼 처리한다.",
+    "미정계수 하나를 구한 뒤 다른 조건을 확인하지 않는다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "정적분 조건으로 연립방정식을 세워 미정계수를 결정하는 것은 미적분Ⅰ '정적분의 활용' 유형이다. f(x)=ax+b를 먼저 정하고 조건값을 역산하는 역방향 설계로 조건값이 항상 정수다(a는 짝수)."
+}

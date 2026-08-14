@@ -1,0 +1,43 @@
+{
+  "template_id": "T-M1-LIM-08-a",
+  "card_id": "M1-LIM-08",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "함수의 연속 - 제거가능한 불연속점 메우기",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "f(x) = \\begin{cases} \\dfrac{x^2 + {-(p+q)}x + {p*q}}{x - {p}} & (x \\ne {p}) \\\\ k & (x = {p}) \\end{cases} \\text{ 가 } x = {p} \\text{ 에서 연속일 때, 상수 } k \\text{ 의 값은?}",
+  "params": [
+    { "name": "p", "type": "int", "range": [-4, 4], "exclude": [0] },
+    { "name": "q", "type": "int", "range": [-4, 4], "exclude": [0] }
+  ],
+  "constraints": [
+    "p != q",
+    "p + q != 0"
+  ],
+  "answer_expr": "p - q",
+  "distractors": [
+    {
+      "expr": "0",
+      "mistake_type": "극한값만 존재하면 연속이라고 생각한다 → 0/0꼴을 보고 0으로 답함"
+    },
+    {
+      "expr": "p + q",
+      "mistake_type": "generic: 분자를 (x-p)(x+q)로 잘못 인수분해"
+    },
+    {
+      "expr": "q - p",
+      "mistake_type": "generic: 약분 후 남은 인수의 부호를 뒤집어 계산"
+    },
+    {
+      "expr": "p",
+      "mistake_type": "조각함수에서 경계값의 식을 잘못 사용한다 → 경계점의 x값을 그대로 답함"
+    }
+  ],
+  "source_mistakes": [
+    "극한값만 존재하면 연속이라고 생각한다.",
+    "조각함수에서 경계값의 식을 잘못 사용한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "lim f(x) = f(a)가 되도록 함수값을 정하는 연속 조건 문제는 미적분Ⅰ '함수의 연속' 기본 유형이며, 인수분해는 선수과목 범위이다."
+}

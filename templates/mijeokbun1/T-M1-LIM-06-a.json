@@ -1,0 +1,40 @@
+{
+  "template_id": "T-M1-LIM-06-a",
+  "card_id": "M1-LIM-06",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "유리화를 이용한 극한",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\lim_{x \\to 0} \\dfrac{\\sqrt{x + {a^2}} - {a}}{x} \\text{ 의 값은?}",
+  "params": [
+    { "name": "a", "type": "int", "range": [1, 5] }
+  ],
+  "constraints": [],
+  "answer_expr": "1/(2*a)",
+  "distractors": [
+    {
+      "expr": "0",
+      "mistake_type": "켤레식을 분자에만 곱한다 → 계산이 무너져 0/0을 0으로 답함"
+    },
+    {
+      "expr": "1/a",
+      "mistake_type": "루트 안의 식을 전개할 때 실수한다 → 유리화 후 분모의 (√(x+a²)+a)를 a 하나로 처리해 2를 누락"
+    },
+    {
+      "expr": "-1/(2*a)",
+      "mistake_type": "유리화 후 부호를 잘못 처리한다"
+    },
+    {
+      "expr": "2*a",
+      "mistake_type": "generic: 유리화 후 분모·분자를 뒤집어 계산"
+    }
+  ],
+  "source_mistakes": [
+    "켤레식을 분자에만 곱한다.",
+    "유리화 후 부호를 잘못 처리한다.",
+    "루트 안의 식을 전개할 때 실수한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "무리식의 유리화를 이용한 0/0꼴 극한은 미적분Ⅰ '함수의 극한' 유형이며, 유리화(합차공식)는 선수과목 공통수학 범위이다. 무리함수의 미분(미적분Ⅱ)은 사용하지 않는다."
+}

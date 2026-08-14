@@ -1,0 +1,42 @@
+{
+  "template_id": "T-M1-DIF-10-a",
+  "card_id": "M1-DIF-10",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "방정식의 실근 개수 - 삼차방정식과 수평선",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{방정식 } x^3 - {3*a^2}x = {k} \\text{ 의 서로 다른 실근의 개수는?}",
+  "params": [
+    { "name": "a", "type": "choice", "choices": [1, 2] },
+    { "name": "k", "type": "int", "range": [-20, 20] }
+  ],
+  "constraints": [
+    "abs(k) != 2*a^3"
+  ],
+  "answer_expr": "abs(k) < 2*a^3 ? 3 : 1",
+  "distractors": [
+    {
+      "expr": "abs(k) < 2*a^3 ? 1 : 3",
+      "mistake_type": "극댓값/극솟값이 아니라 극점의 x좌표와 비교한다 → 비교 방향이 뒤집혀 반대 결론"
+    },
+    {
+      "expr": "2",
+      "mistake_type": "접하는 경우를 두 근으로 세거나 빠뜨린다 → 경계(접하는 경우)로 착각"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "generic: 그래프 개형 판단 실패 (홀수차 방정식은 실근이 항상 존재)"
+    },
+    {
+      "expr": "4",
+      "mistake_type": "generic: 교점 개수 과대 계산 (삼차방정식의 실근은 최대 3개)"
+    }
+  ],
+  "source_mistakes": [
+    "극댓값/극솟값이 아니라 극점의 x좌표와 비교한다.",
+    "접하는 경우를 두 근으로 세거나 빠뜨린다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "f(x)=k의 실근 개수를 극댓값·극솟값과 k의 비교로 판단하는 것은 미적분Ⅰ '방정식에의 활용' 대표 유형이다. (극값이 ±2a³이 되는 x³-3a²x 꼴로 역방향 설계)"
+}

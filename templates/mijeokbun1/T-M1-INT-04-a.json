@@ -1,0 +1,48 @@
+{
+  "template_id": "T-M1-INT-04-a",
+  "card_id": "M1-INT-04",
+  "course": "미적분Ⅰ",
+  "unit": "다항함수의 적분법",
+  "title": "정적분의 기본 성질 - 구간 분할(가법성)",
+  "difficulty": 1,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{함수 } f(x) \\text{ 가 } \\displaystyle\\int_{0}^{{p}} f(x)\\,dx = {A},\\ \\int_{0}^{{q}} f(x)\\,dx = {B} \\text{ 를 만족시킬 때, } \\displaystyle\\int_{{p}}^{{q}} f(x)\\,dx \\text{ 의 값은?}",
+  "params": [
+    { "name": "p", "type": "int", "range": [1, 4] },
+    { "name": "q", "type": "int", "range": [2, 8] },
+    { "name": "A", "type": "int", "range": [-9, 9], "exclude": [0] },
+    { "name": "B", "type": "int", "range": [-9, 9], "exclude": [0] }
+  ],
+  "constraints": [
+    "q > p",
+    "A != B",
+    "B - A != A - B",
+    "B - A != A + B",
+    "B - A != B",
+    "B - A != -(A + B)"
+  ],
+  "answer_expr": "B - A",
+  "distractors": [
+    {
+      "expr": "A - B",
+      "mistake_type": "구간을 나눌 때 순서를 틀린다 → ∫_p^q = ∫_0^p - ∫_0^q 로 순서를 뒤집어 계산"
+    },
+    {
+      "expr": "A + B",
+      "mistake_type": "구간을 나눌 때 순서를 틀린다 → 가법성을 잘못 적용해 두 값을 그대로 더함"
+    },
+    {
+      "expr": "B",
+      "mistake_type": "generic: 구간 분할을 무시하고 ∫_0^q 값을 그대로 답으로 씀"
+    },
+    {
+      "expr": "-(A + B)",
+      "mistake_type": "generic: 두 값을 더한 뒤 부호를 반대로 계산 (부호 실수)"
+    }
+  ],
+  "source_mistakes": [
+    "구간을 나눌 때 순서를 틀린다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "정적분의 가법성 ∫_a^b = ∫_a^c + ∫_c^b 은 미적분Ⅰ '다항함수의 적분법 - 정적분의 성질' 범위이며, 적분 계산 자체를 요구하지 않아 치환·부분적분(미적분Ⅱ)이 개입하지 않는다."
+}

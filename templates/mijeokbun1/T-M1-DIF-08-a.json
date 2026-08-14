@@ -1,0 +1,47 @@
+{
+  "template_id": "T-M1-DIF-08-a",
+  "card_id": "M1-DIF-08",
+  "course": "미적분Ⅰ",
+  "unit": "미분",
+  "title": "극대와 극소 - 삼차함수의 극댓값",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "\\text{함수 } f(x) = x^3 + {-3*(r+s)/2}x^2 + {3*r*s}x + {d} \\text{ 의 극댓값은?}",
+  "params": [
+    { "name": "r", "type": "int", "range": [-4, 2], "exclude": [0] },
+    { "name": "s", "type": "int", "range": [-2, 4], "exclude": [0] },
+    { "name": "d", "type": "int", "range": [-5, 5], "exclude": [0] }
+  ],
+  "constraints": [
+    "r < s",
+    "mod(r + s, 2) == 0",
+    "r + s != 0",
+    "r^3 - 3*(r+s)/2*r^2 + 3*r*s*r + d != 0",
+    "r^3 - 3*(r+s)/2*r^2 + 3*r*s*r + d != r"
+  ],
+  "answer_expr": "r^3 - 3*(r+s)/2*r^2 + 3*r*s*r + d",
+  "distractors": [
+    {
+      "expr": "s^3 - 3*(r+s)/2*s^2 + 3*r*s*s + d",
+      "mistake_type": "generic: f'의 부호 변화 방향을 반대로 읽어 극솟값을 극댓값으로 착각"
+    },
+    {
+      "expr": "r",
+      "mistake_type": "극값의 x좌표와 y값을 혼동한다 → 극대가 되는 x의 값을 답함"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "도함수에 대입한 값을 극값으로 쓴다 → f'(극대점)=0을 답함"
+    },
+    {
+      "expr": "r^3 - 3*(r+s)/2*r^2 + 3*r*s*r",
+      "mistake_type": "generic: 상수항 d를 누락"
+    }
+  ],
+  "source_mistakes": [
+    "극값의 x좌표와 y값을 혼동한다.",
+    "도함수에 대입한 값을 극값으로 쓴다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "f'의 부호가 +→-로 바뀌는 점에서 극대라는 판정과 삼차함수 극값 계산은 미적분Ⅰ '극대와 극소' 대표 유형이다. (f'(x)=3(x-r)(x-s)가 되도록 역방향 설계)"
+}

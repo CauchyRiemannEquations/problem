@@ -1,0 +1,46 @@
+{
+  "template_id": "T-M1-LIM-02-a",
+  "card_id": "M1-LIM-02",
+  "course": "미적분Ⅰ",
+  "unit": "함수의 극한과 연속",
+  "title": "좌극한과 우극한 - 조각함수의 한쪽 극한 계산",
+  "difficulty": 2,
+  "problem_format": "mcq5",
+  "stem_latex": "f(x) = \\begin{cases} x + {a} & (x < {p}) \\\\ {b}x + {c} & (x \\ge {p}) \\end{cases} \\text{ 일 때, } \\lim_{x \\to {p}^{-}} f(x) - \\lim_{x \\to {p}^{+}} f(x) \\text{ 의 값은?}",
+  "params": [
+    { "name": "a", "type": "int", "range": [-5, 5], "exclude": [0] },
+    { "name": "b", "type": "int", "range": [-3, 3], "exclude": [0] },
+    { "name": "c", "type": "int", "range": [-5, 5], "exclude": [0] },
+    { "name": "p", "type": "int", "range": [-3, 3] }
+  ],
+  "constraints": [
+    "p + a != b*p + c",
+    "b*p + c != 0",
+    "p + a != 0"
+  ],
+  "answer_expr": "(p + a) - (b*p + c)",
+  "distractors": [
+    {
+      "expr": "(b*p + c) - (p + a)",
+      "mistake_type": "조각함수에서 x=a일 때의 식을 좌우 접근식과 혼동한다 → 좌극한과 우극한을 반대로 계산"
+    },
+    {
+      "expr": "0",
+      "mistake_type": "한쪽 값만 보고 극한값이 있다고 판단한다 → 좌극한과 우극한이 같다고 착각해 차를 0으로 답함"
+    },
+    {
+      "expr": "p + a",
+      "mistake_type": "generic: 좌극한 값만 계산하고 차를 구하지 않음"
+    },
+    {
+      "expr": "(p + a) + (b*p + c)",
+      "mistake_type": "generic: 차 대신 합을 계산"
+    }
+  ],
+  "source_mistakes": [
+    "한쪽 값만 보고 극한값이 있다고 판단한다.",
+    "조각함수에서 x=a일 때의 식을 좌우 접근식과 혼동한다."
+  ],
+  "needs_figure": false,
+  "curriculum_check": "조각으로 정의된 일차함수의 좌극한·우극한 계산은 미적분Ⅰ '함수의 극한' 범위이며, 일차함수는 선수과목(공통수학) 개념이다."
+}
