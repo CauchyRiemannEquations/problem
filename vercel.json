@@ -1,0 +1,4 @@
+{
+  "buildCommand": "npm run factory:embed",
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/app" }]
+}
