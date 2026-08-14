@@ -5,6 +5,7 @@
 import { create, all } from "mathjs";
 import * as fs from "node:fs";
 import * as path from "node:path";
+import { fileURLToPath } from "node:url";
 import type { ProblemTemplate, ParamSpec, GeneratedProblem } from "./schema.js";
 import { renderFigure } from "./figure.js";
 
@@ -261,10 +262,10 @@ export function loadTemplates(courseDir: string): ProblemTemplate[] {
 
 export const FACTORY_ROOT = (() => {
   try {
-    // tsx/ESM 실행 시: src/의 부모 = factory 루트
-    return path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
+    // tsx/ESM 실행 시: src/의 부모 = factory 루트 (Windows 경로 호환을 위해 fileURLToPath 사용)
+    return path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
   } catch {
-    // exe 번들(CJS)에서는 import.meta가 없음 — 파일 로딩 대신 임베딩 데이터를 쓰므로 cwd로 충분
+    // 번들(CJS)에서는 import.meta가 없음 — 파일 로딩 대신 임베딩 데이터를 쓰므로 cwd로 충분
     return process.cwd();
   }
 })();
